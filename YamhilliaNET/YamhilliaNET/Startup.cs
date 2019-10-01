@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using YamhilliaNET.Data.Providers;
 
 namespace YamhilliaNET
 {
@@ -36,7 +37,7 @@ namespace YamhilliaNET
 
         protected virtual void ConfigureDatabase(IServiceCollection services)
         {
-
+            services.AddTransient<DatabaseProviders, DatabaseProviders>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
