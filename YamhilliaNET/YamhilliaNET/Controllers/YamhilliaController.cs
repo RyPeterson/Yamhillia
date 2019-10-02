@@ -23,9 +23,9 @@ namespace YamhilliaNET.Controllers
         }
 
         [HttpGet]
-        public int Ping()
+        public async Task<int> Ping()
         {
-            using(var connection = provider.DatabaseProvider.Connect())
+            using(var connection = await provider.DatabaseProvider.ConnectAsync())
             {
  
                 connection.Query("SELECT 1");

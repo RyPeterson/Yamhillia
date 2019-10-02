@@ -13,5 +13,7 @@ namespace YamhilliaNET.Data.Providers
         string ConnectionString { get; }
 
         DbConnection Connect();
+
+        Task<DbConnection> ConnectAsync();
     }
 }

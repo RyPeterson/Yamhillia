@@ -1,3 +1,6 @@
 ﻿{
-
+    "DBMode": "light",
+    "ConnectionStrings": {
+        "DefaultConnection": "memory"
+    }
 }

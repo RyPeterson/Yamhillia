@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using YamhilliaNET;
 using YamhilliaNET.Data;
+using YamhilliaNET.Data.Providers;
 
 namespace YamhilliaNETTests
 {
@@ -89,13 +90,39 @@ namespace YamhilliaNETTests
                 if (configuration == null)
                 {
                     configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("test-appsettings.json")
-                    .Build();
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("test-appsettings.json")
+                        .Build();
                 }
 
                 return configuration;
             }
+        }
+
+        private class TestSqliteProvider : SqliteProvider
+        {
+            public TestSqliteProvider() : base("yamhillia-test.db")
+            {
+                
+            }
+        }
+
+        private class TestPostgresProvider : PostgresProvider
+        {
+            public TestPostgresProvider() : base("Host=localhost;Database=yamhillia-tests;User ID=postgres;Password=kappa;timeout=1000;")
+            {
+                
+            }
+        }
+
+        public class TestDatabaseProviders : DatabaseProviders
+        {
+            public TestDatabaseProviders() : base(null)
+            {
+            }
+
+            public override IDatabaseProvider DatabaseProvider => new TestPostgresProvider();
+
         }
     }
 }

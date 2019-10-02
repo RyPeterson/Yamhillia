@@ -12,16 +12,19 @@ namespace YamhilliaNET.Data.Providers
 
         public DatabaseProviders(IConfiguration config)
         {
-            if(config.GetValue<string>("DBMode") == "light")
+            if(config != null)
             {
-                provider = new SqliteProvider(config);
-            }
-            else
-            {
-                provider = new PostgresProvider(config);
+                if(config.GetValue<string>("DBMode") == "light")
+                {
+                    provider = new SqliteProvider(config);
+                }
+                else
+                {
+                    provider = new PostgresProvider(config);
+                }
             }
         }
 
-        public IDatabaseProvider DatabaseProvider => provider;
+        public virtual IDatabaseProvider DatabaseProvider => provider;
     }
 }

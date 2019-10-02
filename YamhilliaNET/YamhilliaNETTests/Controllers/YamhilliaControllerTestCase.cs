@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using YamhilliaNET.Controllers;
+using YamhilliaNET.Data.Providers;
 
 namespace YamhilliaNETTests.Controllers
 {
@@ -11,13 +12,14 @@ namespace YamhilliaNETTests.Controllers
         private readonly YamhilliaController controller;
         public YamhilliaControllerTestCase()
         {
-            controller = new YamhilliaController();
+            
+            controller = new YamhilliaController(new TestDatabaseProviders());
         }
 
         [Fact]
-        public void TestPing()
+        public async void TestPing()
         {
-            Assert.Equal(200, controller.Ping());
+            Assert.Equal(200, await controller.Ping());
         }
     }
 }

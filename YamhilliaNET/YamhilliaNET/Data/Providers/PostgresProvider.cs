@@ -23,6 +23,17 @@ namespace YamhilliaNET.Data.Providers
 
         }
 
+        protected PostgresProvider(string connectionString)
+        {
+            if(string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentException("No connection string specified");
+            }
+
+            this.connectionString = connectionString;
+
+        }
+
         public DbProviderFactory Factory => Npgsql.NpgsqlFactory.Instance;
 
         public string ConnectionString => connectionString;
@@ -37,6 +48,19 @@ namespace YamhilliaNET.Data.Providers
                 throw new InvalidOperationException("Database connection not obtained");
             }
             return (Npgsql.NpgsqlConnection)connection;
+        }
+
+        
+        public async Task<DbConnection> ConnectAsync() 
+        {
+            var connection = Factory.CreateConnection();
+            connection.ConnectionString = connectionString;
+            await connection.OpenAsync();
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                throw new InvalidOperationException("Database connection not obtained");
+            }
+            return connection;
         }
     }
 }

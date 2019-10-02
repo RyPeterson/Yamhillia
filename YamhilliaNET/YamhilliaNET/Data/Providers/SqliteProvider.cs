@@ -25,6 +25,16 @@ namespace YamhilliaNET.Data.Providers
 
         }
 
+        protected SqliteProvider(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+            {
+                throw new ArgumentException("No connection string specified");
+            }
+            var path = Path.Combine(Environment.CurrentDirectory, file);
+            this.connectionString = string.Format("FileName={0};", path);
+        }
+
         public DbProviderFactory Factory => SqliteFactory.Instance;
 
         public string ConnectionString => connectionString;
@@ -36,6 +46,18 @@ namespace YamhilliaNET.Data.Providers
             var connection = Factory.CreateConnection();
             connection.ConnectionString = connectionString;
             connection.Open();
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                throw new InvalidOperationException("Database connection not obtained");
+            }
+            return connection;
+        }
+
+        public async Task<DbConnection> ConnectAsync() 
+        {
+            var connection = Factory.CreateConnection();
+            connection.ConnectionString = connectionString;
+            await connection.OpenAsync();
             if (connection.State != System.Data.ConnectionState.Open)
             {
                 throw new InvalidOperationException("Database connection not obtained");
