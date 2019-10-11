@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using YamhilliaNET.Controllers;
-using YamhilliaNET.Data.Providers;
 
 namespace YamhilliaNETTests.Controllers
 {
@@ -13,7 +12,7 @@ namespace YamhilliaNETTests.Controllers
         public YamhilliaControllerTestCase()
         {
             
-            controller = new YamhilliaController(new TestDatabaseProviders());
+            controller = new YamhilliaController(GetApplicationDbContext());
         }
 
         [Fact]

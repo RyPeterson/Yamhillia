@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,12 +10,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using YamhilliaNET;
 using YamhilliaNET.Data;
-using YamhilliaNET.Data.Providers;
 
 namespace YamhilliaNETTests
 {
     public class IntegrationTestCase : Startup
     {
+        /// <summary>
+        /// Password used for all users created via test cases unless explicitly changed
+        /// </summary>
         public static readonly string UNIVERSAL_USER_PASSWORD = "Password1@";
         private ServiceCollection services;
         private ServiceProvider serviceProvider;
@@ -21,7 +25,7 @@ namespace YamhilliaNETTests
         static long COUNTER = 0;
 
         private bool configured;
-        private int configLock;
+        private int configLock; 
 
         public IntegrationTestCase() : base(TestConfiguration.Get())
         {
@@ -37,11 +41,30 @@ namespace YamhilliaNETTests
                     services = new ServiceCollection();
                     ConfigureServices(services);
                     serviceProvider = services.BuildServiceProvider();
+                    //Nuke db between each test
+                    GetService<ApplicationDbContext>().Database.EnsureDeleted();
+                    GetService<ApplicationDbContext>().Database.EnsureCreated();
 
                 }
                 configured = true;
                 Interlocked.Exchange(ref configLock, 0);
             }
+        }
+
+
+        protected override void ConfigureDatabase(IServiceCollection services)
+        {
+            var builder = new SqliteConnectionStringBuilder()
+            {
+                DataSource = $"test_{Guid.NewGuid().ToString().Replace('-', '_')}.db"
+            };
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(builder.ToString()));
+        }
+
+        protected override void SetupServices(IServiceCollection services)
+        {
+            base.SetupServices(services);
         }
 
         protected ApplicationDbContext GetApplicationDbContext()
@@ -72,14 +95,6 @@ namespace YamhilliaNETTests
             return serviceProvider.GetService<T>();
         }
 
-        /*
-        protected async Task<ApplicationUser> CreateUser()
-        {
-            Interlocked.Increment(ref COUNTER);
-            var email = "test_" + Guid.NewGuid().ToString() + "@test.com";
-
-        }
-        */
 
         public class TestConfiguration
         {
@@ -90,39 +105,13 @@ namespace YamhilliaNETTests
                 if (configuration == null)
                 {
                     configuration = new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("test-appsettings.json")
-                        .Build();
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("test-appsettings.json")
+                    .Build();
                 }
 
                 return configuration;
             }
-        }
-
-        private class TestSqliteProvider : SqliteProvider
-        {
-            public TestSqliteProvider() : base("yamhillia-test.db")
-            {
-                
-            }
-        }
-
-        private class TestPostgresProvider : PostgresProvider
-        {
-            public TestPostgresProvider() : base("Host=localhost;Database=yamhillia-tests;User ID=postgres;Password=kappa;timeout=1000;")
-            {
-                
-            }
-        }
-
-        public class TestDatabaseProviders : DatabaseProviders
-        {
-            public TestDatabaseProviders() : base(null)
-            {
-            }
-
-            public override IDatabaseProvider DatabaseProvider => new TestPostgresProvider();
-
         }
     }
 }

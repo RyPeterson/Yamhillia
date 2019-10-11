@@ -1,35 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
-using YamhilliaNET.Data.Providers;
+using Microsoft.EntityFrameworkCore;
+using YamhilliaNET.Data;
 
 namespace YamhilliaNET.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class YamhilliaController : ControllerBase
+    [Route("/api/yamhillia")]
+    public class YamhilliaController
     {
-
-        private readonly DatabaseProviders provider;
-
-        public YamhilliaController(DatabaseProviders dbProvider)
+        private readonly ApplicationDbContext dbContext;
+        public YamhilliaController(ApplicationDbContext db)
         {
-            provider = dbProvider;
+            this.dbContext = db;
         }
-
         [HttpGet]
         public async Task<int> Ping()
         {
-            using(var connection = await provider.DatabaseProvider.ConnectAsync())
-            {
- 
-                connection.Query("SELECT 1");
-            }
+            await dbContext.Database.ExecuteSqlRawAsync("SELECT 1;");
             return 200;
         }
     }
