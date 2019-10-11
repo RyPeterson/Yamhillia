@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using YamhilliaNET.Data;
 using Microsoft.EntityFrameworkCore;
+using YamhilliaNET.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace YamhilliaNET
 {
@@ -37,12 +38,18 @@ namespace YamhilliaNET
         {
             SetupServices(services);
             ConfigureDatabase(services);
+            ConfigureAuth(services);
         }
 
         protected virtual void SetupServices(IServiceCollection services)
         {
             services.AddOptions();
             services.AddControllers();
+        }
+
+        protected virtual void ConfigureAuth(IServiceCollection services)
+        {
+
         }
 
         protected virtual void ConfigureDatabase(IServiceCollection services)
