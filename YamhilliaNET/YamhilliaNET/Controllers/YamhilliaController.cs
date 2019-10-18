@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YamhilliaNET.Data;
@@ -14,6 +15,8 @@ namespace YamhilliaNET.Controllers
         {
             this.dbContext = db;
         }
+        
+        [AllowAnonymous]
         [HttpGet]
         public async Task<int> Ping()
         {

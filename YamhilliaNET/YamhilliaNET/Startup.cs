@@ -1,20 +1,18 @@
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using YamhilliaNET.Data;
 using Microsoft.EntityFrameworkCore;
-using YamhilliaNET.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using YamhilliaNET.Services.User;
+using YamhilliaNET.Models;
 
 namespace YamhilliaNET
 {
@@ -43,13 +41,50 @@ namespace YamhilliaNET
 
         protected virtual void SetupServices(IServiceCollection services)
         {
-            services.AddOptions();
             services.AddControllers();
+            services.AddTransient<Services.Auth.IAuthenticationService, Services.Auth.AuthenticationService>();
+            services.AddTransient<IUserService, UserService>();
+
         }
 
         protected virtual void ConfigureAuth(IServiceCollection services)
         {
+            var issuer = Configuration["JWT:Issuer"];
+            if(string.IsNullOrEmpty(issuer))
+            {
+                throw new ArgumentException("No JWT:Issuer set");
+            }
 
+            var key = Configuration["JWT:Key"];
+            if(string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentException("No JWT:Key set");
+            }
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                  ValidateIssuer = true,
+                  ValidateAudience = true,
+                  ValidateLifetime = true,
+                  ValidateIssuerSigningKey = true,
+                  ValidIssuer = issuer,
+                  ValidAudience = issuer, 
+                  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)) 
+                };
+            });
+
+            services.AddIdentity<YamhilliaUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireNonAlphanumeric = true;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
         }
 
         protected virtual void ConfigureDatabase(IServiceCollection services)
@@ -95,7 +130,6 @@ namespace YamhilliaNET
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
