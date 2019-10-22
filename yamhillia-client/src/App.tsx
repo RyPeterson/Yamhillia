@@ -1,13 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      TODO: make stuff
-    </div>
-  );
-}
+  return <div className="App">TODO: make stuff</div>;
+};
 
 export default App;
