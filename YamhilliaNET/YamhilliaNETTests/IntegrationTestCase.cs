@@ -67,6 +67,16 @@ namespace YamhilliaNETTests
             base.SetupServices(services);
         }
 
+        protected override void ConfigureAuth(IServiceCollection services)
+        {
+            // rofl
+        }
+
+        protected override void ConfigureCORS(IServiceCollection services)
+        {
+            // lawl
+        }
+
         protected ApplicationDbContext GetApplicationDbContext()
         {
             if (!configured)
