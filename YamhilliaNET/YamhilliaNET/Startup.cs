@@ -37,6 +37,7 @@ namespace YamhilliaNET
             SetupServices(services);
             ConfigureDatabase(services);
             ConfigureAuth(services);
+            ConfigureCORS(services);
         }
 
         protected virtual void SetupServices(IServiceCollection services)
@@ -117,6 +118,20 @@ namespace YamhilliaNET
             }
         }
 
+        protected virtual void ConfigureCORS(IServiceCollection services)
+        {
+            var corsConfig = Configuration["AllowedCORS"];
+            if(string.IsNullOrEmpty(corsConfig))
+            {
+                throw new ArgumentException("No CORS orgins specified");
+            }
+            var orgins = corsConfig.Split(',');
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            {
+                builder.WithOrigins(orgins).AllowAnyMethod().AllowAnyHeader();
+            }));
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -128,6 +143,8 @@ namespace YamhilliaNET
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ApiCorsPolicy");
 
             app.UseAuthentication();
 

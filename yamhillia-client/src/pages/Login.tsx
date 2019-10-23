@@ -1,6 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Page from "./Page";
+import yamhilliaApi from "../api/yamhilliaApi";
 
-const Login: FC = props => <Page title="Login">login page</Page>;
+const Login: FC = props => {
+  return <Page title="Login">login page</Page>;
+};
 
 export default Login;

@@ -1,10 +1,18 @@
 import Axios, { AxiosInstance, AxiosError } from "axios";
+import * as UserEndpoints from "./UserEndpoints";
+import * as UtilityEndpoints from "./UtilityEndpoints";
+
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:80";
+console.log(process.env);
 
 const axios: AxiosInstance = Axios.create({
-  baseURL: `/api`
+  baseURL: `${apiUrl}/api/yamhillia`
 });
 
-const api = {};
+const api = {
+  ...UserEndpoints,
+  ...UtilityEndpoints
+};
 
 export default bindAxiosToApi(api, axios);
 
