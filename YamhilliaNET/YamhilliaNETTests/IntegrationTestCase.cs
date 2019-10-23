@@ -109,7 +109,8 @@ namespace YamhilliaNETTests
 
         protected async Task<YamhilliaUser> CreateUser()
         {
-            return await GetService<IUserService>().Create(new CreateUserModel(){
+            return await GetService<IUserService>().Create(new CreateUserModel()
+            {
                 Email = $"{new Guid().ToString()}@test.com",
                 FirstName = "Test",
                 Password = UNIVERSAL_USER_PASSWORD,
