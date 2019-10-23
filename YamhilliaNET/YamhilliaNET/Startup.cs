@@ -43,6 +43,7 @@ namespace YamhilliaNET
         protected virtual void SetupServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton(provider => Configuration);
             services.AddTransient<Services.Auth.IAuthenticationService, Services.Auth.AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
 

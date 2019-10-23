@@ -1,6 +1,10 @@
 ﻿{
-    "DBMode": "light",
-    "ConnectionStrings": {
-        "DefaultConnection": "memory"
-    }
+  "DBMode": "light",
+  "ConnectionStrings": {
+    "DefaultConnection": "memory"
+  },
+  "JWT": {
+    "Key": "IHADAJADESALEATTHEBEACH",
+    "Issuer": "http://test/"
+  }
 }

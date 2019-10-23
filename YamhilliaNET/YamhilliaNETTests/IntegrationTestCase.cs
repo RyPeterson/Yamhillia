@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using YamhilliaNET;
 using YamhilliaNET.Data;
+using YamhilliaNET.Models;
+using YamhilliaNET.Services.User;
 
 namespace YamhilliaNETTests
 {
@@ -65,11 +68,10 @@ namespace YamhilliaNETTests
         protected override void SetupServices(IServiceCollection services)
         {
             base.SetupServices(services);
-        }
-
-        protected override void ConfigureAuth(IServiceCollection services)
-        {
-            // rofl
+            services.AddLogging(config =>
+            {
+                config.AddDebug();
+            });
         }
 
         protected override void ConfigureCORS(IServiceCollection services)
@@ -103,6 +105,16 @@ namespace YamhilliaNETTests
         protected T GetService<T>() where T : class
         {
             return serviceProvider.GetService<T>();
+        }
+
+        protected async Task<YamhilliaUser> CreateUser()
+        {
+            return await GetService<IUserService>().Create(new CreateUserModel(){
+                Email = $"{new Guid().ToString()}@test.com",
+                FirstName = "Test",
+                Password = UNIVERSAL_USER_PASSWORD,
+                LastName = "User"
+            });
         }
 
 
