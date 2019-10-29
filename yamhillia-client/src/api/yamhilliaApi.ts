@@ -1,17 +1,41 @@
 import Axios, { AxiosInstance, AxiosError } from "axios";
+import Cookies from "js-cookie";
 import * as UserEndpoints from "./UserEndpoints";
 import * as UtilityEndpoints from "./UtilityEndpoints";
 
+const loginCookieName = "fluffy";
+
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:80";
-console.log(process.env);
 
 const axios: AxiosInstance = Axios.create({
   baseURL: `${apiUrl}/api/yamhillia`
 });
 
+axios.interceptors.request.use(conf => {
+  conf.headers.common["Authorization"] = `Bearer ${Cookies.get(
+    loginCookieName
+  )}`;
+  return conf;
+});
+
 const api = {
   ...UserEndpoints,
-  ...UtilityEndpoints
+  ...UtilityEndpoints,
+  login: async (axios: AxiosInstance, username: string, password: string) => {
+    const userWithToken = await api._login(axios, username, password);
+    if (userWithToken.token) {
+      Cookies.set(loginCookieName, userWithToken.token);
+      return userWithToken.user;
+    }
+    return null;
+  },
+  logout: () => {
+    Cookies.remove(loginCookieName);
+  },
+  getUser: async (axios: AxiosInstance) => {
+    const user = await api._getUser(axios);
+    return user;
+  }
 };
 
 export default bindAxiosToApi(api, axios);

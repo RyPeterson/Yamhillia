@@ -46,7 +46,6 @@ namespace YamhilliaNET
             services.AddSingleton(provider => Configuration);
             services.AddTransient<Services.Auth.IAuthenticationService, Services.Auth.AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
-
         }
 
         protected virtual void ConfigureAuth(IServiceCollection services)
@@ -63,9 +62,28 @@ namespace YamhilliaNET
                 throw new ArgumentException("No JWT:Key set");
             }
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(auth => 
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
             .AddJwtBearer(options =>
             {
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async ctx => 
+                    {
+                        var serviceProvider = services.BuildServiceProvider();
+                        var userService = serviceProvider.GetService<IUserService>();
+                        var userId = ctx.Principal.Identity.Name;
+                        var user = await userService.GetUserById(userId); 
+                        if(user == null)
+                        {
+                            ctx.Fail("Unauthorized");
+                        }
+                    }
+                };
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                   ValidateIssuer = true,
@@ -141,13 +159,18 @@ namespace YamhilliaNET
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            if (!env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
+
 
             app.UseRouting();
 
             app.UseCors("ApiCorsPolicy");
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

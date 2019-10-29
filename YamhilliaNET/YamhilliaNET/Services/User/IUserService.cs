@@ -9,6 +9,10 @@ namespace YamhilliaNET.Services.User
         Task<YamhilliaUser> GetUserByUsernameAndPassword(string username, string password);
 
         Task<YamhilliaUser> Create(CreateUserModel createUserModel);
+
+        Task<YamhilliaUser> FindByEmail(string email);
+
+        Task<YamhilliaUser> GetUserById(string id);
     }
 
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using YamhilliaNET.Models;
 using YamhilliaNET.Services.User;
 
 namespace YamhilliaNET.Services.Auth
@@ -24,10 +25,18 @@ namespace YamhilliaNET.Services.Auth
 
         public async Task<string> CreateToken(LoginModel loginModel)
         {
+            var userAndToken = await Login(loginModel);
+            return userAndToken.Token;
+        }
+
+        public async Task<UserAndToken> Login(LoginModel loginModel)
+        {
             var user = await userService.GetUserByUsernameAndPassword(loginModel.Username, loginModel.Password);
 
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -42,7 +51,14 @@ namespace YamhilliaNET.Services.Auth
                 expires: DateTime.Now.AddMinutes(EXPIRATION_MINUTES),
                 signingCredentials: creds
             );
-            return new JwtSecurityTokenHandler().WriteToken(token);
+
+            user.PasswordHash = null;
+
+            return new UserAndToken()
+            {
+                User = user,
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
+            };
         }
     }
 }

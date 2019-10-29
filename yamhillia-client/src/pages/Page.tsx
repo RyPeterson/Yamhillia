@@ -1,11 +1,13 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
+import { MoonLoader } from "react-spinners";
 import Column from "../components/Column";
 import NavBar from "../components/NavBar";
 import theme, { background } from "../constants/theme";
 
 interface PageProps {
   title?: string;
+  loading?: boolean;
 }
 
 function setTitleWithMagic(title?: string) {
@@ -16,13 +18,22 @@ function setTitleWithMagic(title?: string) {
   }
 }
 
-const Page: FC<PageProps> = ({ children, title, ...rest }) => {
-  useEffect(() => setTitleWithMagic(title), [title]);
-
+const Page: FC<PageProps> = ({ children, title, loading, ...rest }) => {
+  setTitleWithMagic(title);
   return (
     <PageRoot {...rest}>
-      <NavBar />
-      {children}
+      {loading ? (
+        <Loading>
+          <MoonLoader />
+          <div>Loading. </div>
+          <div>Please Wait...</div>
+        </Loading>
+      ) : (
+        <>
+          <NavBar />
+          {children}
+        </>
+      )}
     </PageRoot>
   );
 };
@@ -33,4 +44,11 @@ const PageRoot = styled(Column)`
   width: 100vw;
   height: 100vh;
   ${background(theme.lightest)}
+`;
+
+const Loading = styled(Column)`
+  height: 100%
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 `;

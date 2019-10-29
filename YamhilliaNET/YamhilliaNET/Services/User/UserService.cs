@@ -34,6 +34,16 @@ namespace YamhilliaNET.Services.User
             throw new InvalidUserNameOrPasswordException();
         }
 
+        public async Task<YamhilliaUser> FindByEmail(string email)
+        {
+            return await userManager.FindByEmailAsync(email);
+        }
+
+        public async Task<YamhilliaUser> GetUserById(string id)
+        {
+            return await userManager.FindByIdAsync(id);
+        }
+
         public async Task<YamhilliaUser> GetUserByUsernameAndPassword(string username, string password)
         {
             var user = await userManager.FindByEmailAsync(username);

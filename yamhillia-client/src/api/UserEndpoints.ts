@@ -1,15 +1,25 @@
 import { AxiosInstance } from "axios";
+import { UserWithToken } from "../models/UserWithToken";
 
-export async function login(
+export async function _login(
   axios: AxiosInstance,
   username: string,
   password: string
-): Promise<string> {
-  const result = await axios.post("/yamhillia/authentication/create-token", {
+): Promise<UserWithToken> {
+  const result = await axios.post("/authentication/login", {
     username,
     password
   });
   const { data } = result;
-  const { token } = data;
-  return String(token);
+  const { user } = data;
+
+  return {
+    user: user.user,
+    token: user.token
+  };
+}
+
+export async function _getUser(axios: AxiosInstance) {
+  const response = await axios.get("/authentication/user");
+  return response.data.user;
 }
