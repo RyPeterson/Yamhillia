@@ -12,7 +12,7 @@ namespace YamhilliaNET.Services.Auth
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private static readonly int EXPIRATION_MINUTES = 30;
+        private static readonly int EXPIRATION_DAYS = 3;
 
         private readonly IConfiguration configuration;
         private readonly IUserService userService;
@@ -48,7 +48,7 @@ namespace YamhilliaNET.Services.Auth
                 configuration["JWT:Issuer"], 
                 configuration["JWT:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(EXPIRATION_MINUTES),
+                expires: DateTime.Now.AddDays(EXPIRATION_DAYS),
                 signingCredentials: creds
             );
 
