@@ -9,6 +9,8 @@ namespace YamhilliaNET.Services.Auth
          Task<string> CreateToken(LoginModel loginModel);
 
          Task<UserAndToken> Login(LoginModel loginModel);
+
+         UserAndToken Login(YamhilliaUser user);
     }   
 
 }

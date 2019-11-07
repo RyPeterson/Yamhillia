@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { MoonLoader } from "react-spinners";
 import Column from "../components/Column";
 import NavBar from "../components/NavBar";
 import theme, { background } from "../constants/theme";
+import Loading from "../components/Loading";
 
 interface PageProps {
   title?: string;
@@ -23,11 +23,7 @@ const Page: FC<PageProps> = ({ children, title, loading, ...rest }) => {
   return (
     <PageRoot {...rest}>
       {loading ? (
-        <Loading>
-          <MoonLoader />
-          <div>Loading. </div>
-          <div>Please Wait...</div>
-        </Loading>
+        <Loading />
       ) : (
         <>
           <NavBar />
@@ -44,11 +40,4 @@ const PageRoot = styled(Column)`
   width: 100vw;
   height: 100vh;
   ${background(theme.lightest)}
-`;
-
-const Loading = styled(Column)`
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
 `;

@@ -33,6 +33,11 @@ namespace YamhilliaNET.Services.Auth
         {
             var user = await userService.GetUserByUsernameAndPassword(loginModel.Username, loginModel.Password);
 
+            return Login(user);
+        }
+
+        public UserAndToken Login(YamhilliaUser user)
+        {
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Id),

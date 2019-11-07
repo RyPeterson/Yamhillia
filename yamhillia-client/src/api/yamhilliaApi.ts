@@ -2,6 +2,7 @@ import Axios, { AxiosInstance, AxiosError } from "axios";
 import Cookies from "js-cookie";
 import * as UserEndpoints from "./UserEndpoints";
 import * as UtilityEndpoints from "./UtilityEndpoints";
+import { User } from "../models/User";
 
 const loginCookieName = "fluffy";
 
@@ -35,6 +36,21 @@ const api = {
   getUser: async (axios: AxiosInstance) => {
     const user = await api._getUser(axios);
     return user;
+  },
+  createUser: async (
+    axios: AxiosInstance,
+    data: UserEndpoints.CreateUserParams
+  ): Promise<User | null> => {
+    const result = await api._createUser(axios, data);
+    if (result) {
+      const { user, token } = result;
+      if (token) {
+        Cookies.remove(loginCookieName);
+        Cookies.set(loginCookieName, token);
+        return user;
+      }
+    }
+    return null;
   }
 };
 

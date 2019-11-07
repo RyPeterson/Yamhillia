@@ -68,8 +68,9 @@ namespace YamhilliaNET.Controllers
             try 
             {
                 var user = await userService.Create(createUserModel);
-                var token = await authService.CreateToken(new LoginModel{Username = user.Email, Password = createUserModel.Password});
-                return Ok(new { token = token });
+                user.PasswordHash = "";
+                var userAndToken = authService.Login(user);
+                return Ok(new { token = userAndToken.Token, user = userAndToken.User });
             }
             catch(InvalidUserNameOrPasswordException)
             {
