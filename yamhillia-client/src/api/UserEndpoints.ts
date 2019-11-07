@@ -20,6 +20,11 @@ export async function _login(
 }
 
 export async function _getUser(axios: AxiosInstance) {
-  const response = await axios.get("/authentication/user");
-  return response.data.user;
+  const response = await axios.get("/authentication/user").catch(e => {
+    /* 401, probably */ return null;
+  });
+  if (response) {
+    return response.data.user;
+  }
+  return null;
 }

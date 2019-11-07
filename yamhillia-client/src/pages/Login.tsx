@@ -1,13 +1,16 @@
 import React, { FC, useState } from "react";
+import { Redirect, RouterProps } from "react-router";
 import styled from "styled-components";
-import Page from "./Page";
 import yamhilliaApi from "../api/yamhilliaApi";
-import Column from "../components/Column";
 import Button from "../components/Button";
+import Column from "../components/Column";
 import useInput from "../utils/useInput";
-import { withRouter, RouterProps } from "react-router";
+import useUserContext from "../utils/UserContext";
+import withUser from "../utils/withUser";
+import Page from "./Page";
 
 const Login: FC<RouterProps> = ({ history, ...rest }) => {
+  const { user } = useUserContext();
   const [email, onEmailChanged] = useInput("");
   const [password, onPasswordChanged] = useInput("");
   const [loading, setLoading] = useState(false);
@@ -30,6 +33,10 @@ const Login: FC<RouterProps> = ({ history, ...rest }) => {
     await login();
   }
 
+  if (user !== null) {
+    return <Redirect to={"/"} />;
+  }
+
   return (
     <Page title="Login" loading={loading}>
       <LoginForm onSubmit={handleSubmit}>
@@ -43,7 +50,7 @@ const Login: FC<RouterProps> = ({ history, ...rest }) => {
   );
 };
 
-export default withRouter(Login);
+export default withUser(Login);
 
 const EmailField = styled.input``;
 const PasswordField = styled.input.attrs({ type: "password" })``;
