@@ -1,39 +1,39 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import {
   Redirect,
-  RouteComponentProps,
-  RouteChildrenProps
+  RouteChildrenProps,
+  RouteComponentProps
 } from "react-router";
-import isEmpty from "validator/lib/isEmpty";
-import isEmail from "validator/lib/isEmail";
 import styled from "styled-components";
+import isEmail from "validator/lib/isEmail";
+import isEmpty from "validator/lib/isEmpty";
+import yamhilliaApi from "../api/yamhilliaApi";
 import Button from "../components/Button";
 import Column from "../components/Column";
+import Loading from "../components/Loading";
+import Row from "../components/Row";
 import getInstallationMode, {
   InstallationModes
 } from "../constants/installationMode";
 import useInput from "../utils/useInput";
 import useUserContext from "../utils/UserContext";
+import validatePassword from "../utils/validatePassword";
 import withUser from "../utils/withUser";
 import Page from "./Page";
-import Row from "../components/Row";
-import Loading from "../components/Loading";
-import yamhilliaApi from "../api/yamhilliaApi";
-import validatePassword from "../utils/validatePassword";
+import theme, { background } from "../constants/theme";
 
 const Register: FC<RouteComponentProps> = props => {
   const { user } = useUserContext();
   const mode = getInstallationMode();
-  const [loading, setLoading] = useState(false);
 
   if (user !== null) {
     return <Redirect to={"/"} />;
   }
 
   return (
-    <Page title="Register" loading={loading}>
+    <Page title="Register">
       {mode === InstallationModes.INTERNET ? (
-        <RegisterForm {...props} onLoading={l => setLoading(l)} />
+        <RegisterForm {...props} />
       ) : (
         <ContactAdminPage {...props} />
       )}
@@ -41,14 +41,8 @@ const Register: FC<RouteComponentProps> = props => {
   );
 };
 
-interface RegisterFormProps extends RouteChildrenProps {
-  onLoading(loading: boolean): void;
-}
-const RegisterForm: FC<RegisterFormProps> = ({
-  onLoading,
-  history,
-  ...rest
-}) => {
+interface RegisterFormProps extends RouteChildrenProps {}
+const RegisterForm: FC<RegisterFormProps> = ({ history, ...rest }) => {
   const [email, onEmailChanged] = useInput("");
   const [firstName, onFirstNameChanged] = useInput("");
   const [lastName, onLastNameChanged] = useInput("");
@@ -74,12 +68,14 @@ const RegisterForm: FC<RegisterFormProps> = ({
     if (nextError.length > 0) return;
     setLoading(true);
     try {
-      const user = await yamhilliaApi.createUser({
-        email,
-        password,
-        firstName,
-        lastName
-      });
+      const user = await yamhilliaApi
+        .createUser({
+          email,
+          password,
+          firstName,
+          lastName
+        })
+        .catch(e => setError("Request to server failed."));
       if (user) {
         history.push("/");
       }
@@ -95,9 +91,9 @@ const RegisterForm: FC<RegisterFormProps> = ({
     await handleSubmit();
   }
 
-  useEffect(() => {
-    onLoading(loading);
-  }, [loading, onLoading]);
+  if (loading) {
+    return <StyledLoading />;
+  }
   return (
     <PageBody>
       <RegisterationForm onSubmit={handleFormSubmit}>
@@ -168,4 +164,11 @@ const PasswordField = styled.input.attrs({ type: "password" })``;
 const FormError = styled(Row)`
   color: red;
   height: 20px;
+`;
+
+const StyledLoading = styled(Loading)`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  ${background(theme.lightest)}
 `;
