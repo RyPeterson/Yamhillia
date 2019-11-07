@@ -4,27 +4,43 @@ import { Link } from "react-router-dom";
 import Row from "./Row";
 import Column from "./Column";
 import theme, { background, foreground } from "../constants/theme";
+import useUserContext from "../utils/UserContext";
 
-const NavBar: FC = props => (
-  <Root>
-    <YamhilliaNavItem>
-      <Link to="/">Yamhillia</Link>
-    </YamhilliaNavItem>
-    <NavItems>
-      <NavItem>
-        <Link to="/">Home</Link>
-      </NavItem>
-    </NavItems>
-    <UserOperations>
-      <NavItem>
-        <Link to="/login">Login</Link>
-      </NavItem>
-      <NavItem>
-        <Link to="/register">Register</Link>
-      </NavItem>
-    </UserOperations>
-  </Root>
-);
+const NavBar: FC = props => {
+  const { user } = useUserContext();
+
+  return (
+    <Root>
+      <YamhilliaNavItem>
+        <Link to="/">Yamhillia</Link>
+      </YamhilliaNavItem>
+      <NavItems>
+        <NavItem>
+          <Link to="/">Home</Link>
+        </NavItem>
+      </NavItems>
+      {user !== null ? (
+        <UserOperations>
+          <NavItem>
+            <Link to="/profile">Welcome {user.email}</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/logout">Logout</Link>
+          </NavItem>
+        </UserOperations>
+      ) : (
+        <UserOperations>
+          <NavItem>
+            <Link to="/login">Login</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/register">Register</Link>
+          </NavItem>
+        </UserOperations>
+      )}
+    </Root>
+  );
+};
 
 const Root = styled(Row)`
   height: 50px;

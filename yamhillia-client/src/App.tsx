@@ -5,6 +5,7 @@ import Index from "./pages/Index";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
+import Profile from "./pages/Profile";
 
 const App: React.FC = () => (
   <Router>
@@ -20,6 +21,9 @@ const App: React.FC = () => (
       </Route>
       <Route exact path="/logout">
         <Logout />
+      </Route>
+      <Route exact path="/profile">
+        <Profile />
       </Route>
     </Switch>
   </Router>
