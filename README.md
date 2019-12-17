@@ -18,7 +18,7 @@
 
 * Close to 100% test coverage on server code (little obsessive to write unit test for an object with only properties). Same with the client if I can wrap my head around it.
 * Adhere to the MIT license compatible libraries except for when there is not a reasonable alternative.
-* Easy to set up. No need for manually writting to the desk with a magnetic needle.
+* Easy to set up. No need for manually writting to the disk with a magnetic needle.
 * Sane SQL.
 * No jQuery or Bootstrap for client components!
 
