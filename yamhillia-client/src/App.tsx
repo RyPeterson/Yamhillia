@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Profile from "./pages/Profile";
+import Playground from "./pages/Playground";
 
 const App: React.FC = () => (
   <Router>
@@ -25,6 +26,11 @@ const App: React.FC = () => (
       <Route exact path="/profile">
         <Profile />
       </Route>
+      {process.env.NODE_ENV === "development" && (
+        <Route exact path="/playground">
+          <Playground />
+        </Route>
+      )}
     </Switch>
   </Router>
 );
