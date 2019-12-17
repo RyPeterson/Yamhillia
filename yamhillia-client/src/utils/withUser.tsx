@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { RouteComponentProps, withRouter, Redirect } from "react-router";
-import { UserProvider } from "./UserContext";
-import { User } from "../models/User";
+import React, { useEffect, useState } from "react";
+import { Redirect, RouteComponentProps, withRouter } from "react-router";
 import yamhilliaApi from "../api/yamhilliaApi";
+import { User } from "../models/User";
+import LoadingPage from "../pages/LoadingPage";
+import { UserProvider } from "./UserContext";
 
 export default function withUser(
   Component: any,
@@ -24,7 +25,7 @@ export default function withUser(
     }, []);
 
     if (loading) {
-      return null;
+      return <LoadingPage />;
     }
 
     if (!loading && protect && user === null) {

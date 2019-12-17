@@ -8,6 +8,7 @@ import Loading from "../components/Loading";
 interface PageProps {
   title?: string;
   loading?: boolean;
+  hideNav?: boolean;
 }
 
 function setTitleWithMagic(title?: string) {
@@ -18,7 +19,13 @@ function setTitleWithMagic(title?: string) {
   }
 }
 
-const Page: FC<PageProps> = ({ children, title, loading, ...rest }) => {
+const Page: FC<PageProps> = ({
+  children,
+  title,
+  loading,
+  hideNav,
+  ...rest
+}) => {
   setTitleWithMagic(title);
   return (
     <PageRoot {...rest}>
@@ -26,7 +33,7 @@ const Page: FC<PageProps> = ({ children, title, loading, ...rest }) => {
         <Loading />
       ) : (
         <>
-          <NavBar />
+          {!hideNav && <NavBar />}
           {children}
         </>
       )}
