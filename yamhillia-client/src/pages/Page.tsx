@@ -44,7 +44,11 @@ const Page: FC<PageProps> = ({
 export default Page;
 
 const PageRoot = styled(Column)`
-  width: 100vw;
-  height: 100vh;
+  flex: 1 1 auto;
+  min-height: 100vh;
   ${background(theme.lightest)}
+
+  ${Loading} {
+    flex: 1;
+  }
 `;

@@ -2,6 +2,7 @@ import Axios, { AxiosInstance, AxiosError } from "axios";
 import Cookies from "js-cookie";
 import * as UserEndpoints from "./UserEndpoints";
 import * as UtilityEndpoints from "./UtilityEndpoints";
+import * as AnimalEndpoints from "./AnimalEndpoints";
 import { User } from "../models/User";
 
 const loginCookieName = "fluffy";
@@ -22,6 +23,7 @@ axios.interceptors.request.use(conf => {
 const api = {
   ...UserEndpoints,
   ...UtilityEndpoints,
+  ...AnimalEndpoints,
   login: async (axios: AxiosInstance, username: string, password: string) => {
     const userWithToken = await api._login(axios, username, password);
     if (userWithToken.token) {
