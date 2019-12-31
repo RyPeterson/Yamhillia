@@ -1,16 +1,14 @@
-import React, { FC, useState, useEffect } from "react";
-import Page from "./Page";
-import withUser from "../utils/withUser";
+import React, { FC, useCallback, useState } from "react";
 import { Redirect } from "react-router-dom";
-import Animal from "../models/Animal";
-import useEffectAsync from "../utils/useEffectAsync";
 import yamhilliaApi from "../api/yamhilliaApi";
 import AnimalOverviewList from "../components/AnimalOverviewList";
-import useWindowSize from "../utils/useWindowSize";
+import Animal from "../models/Animal";
+import useEffectAsync from "../utils/useEffectAsync";
+import withUser from "../utils/withUser";
+import Page from "./Page";
 
 const Playgound: FC = props => {
   const [animals, setAnimals] = useState<Animal[]>([]);
-  const [cardsPerRow, setCardsPerRow] = useState(5);
   const [loading, setLoading] = useState(true);
 
   useEffectAsync(async unmounted => {
@@ -21,15 +19,17 @@ const Playgound: FC = props => {
     }
   }, []);
 
-  const windowSize = useWindowSize();
-  useEffect(() => {}, [windowSize]);
+  const onAnimalClicked = useCallback(animal => {}, []);
 
   if (process.env.NODE_ENV !== "development") {
     return <Redirect to="/" />;
   }
   return (
     <Page loading={loading}>
-      <AnimalOverviewList animals={animals} cardsPerRow={cardsPerRow} />
+      <AnimalOverviewList
+        animals={animals}
+        onAnimalDetailsClicked={onAnimalClicked}
+      />
     </Page>
   );
 };

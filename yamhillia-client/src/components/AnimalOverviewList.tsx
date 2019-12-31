@@ -1,37 +1,24 @@
-import React, { FC, useMemo } from "react";
-import styled, { css, FlattenSimpleInterpolation } from "styled-components";
-import chunk from "lodash/chunk";
-import Column from "./Column";
+import React, { FC } from "react";
+import styled from "styled-components";
 import Animal from "../models/Animal";
-import Row from "./Row";
 import AnimalCard from "./AnimalCard";
+import Row from "./Row";
 
 interface AnimalOverviewListProps {
   animals: Animal[];
-  cardsPerRow?: number;
+  onAnimalDetailsClicked(animal: Animal): void;
 }
 
 const AnimalOverviewList: FC<AnimalOverviewListProps> = props => {
-  const { animals, cardsPerRow = 5, ...rest } = props;
-  const animalsPerRow = Math.max(cardsPerRow, 1);
-
-  const animalRows = useMemo(
-    () =>
-      chunk(animals, animalsPerRow).map((animalRow, idx) => ({
-        animals: animalRow,
-        key: idx
-      })),
-    [animalsPerRow]
-  );
-
+  const { animals, onAnimalDetailsClicked, ...rest } = props;
   return (
     <ListRoot {...rest}>
-      {animalRows.map(({ animals, key }) => (
-        <AnimalRow key={key}>
-          {animals.map(animal => (
-            <AnimalCard key={animal.id} animal={animal} />
-          ))}
-        </AnimalRow>
+      {animals.map(animal => (
+        <AnimalCard
+          key={animal.id}
+          animal={animal}
+          onAnimalDetailsClicked={() => onAnimalDetailsClicked(animal)}
+        />
       ))}
     </ListRoot>
   );
@@ -39,21 +26,14 @@ const AnimalOverviewList: FC<AnimalOverviewListProps> = props => {
 
 export default styled(AnimalOverviewList)``;
 
-const AnimalRow = styled(Row)`
-  justify-content: space-between;
+const ListRoot = styled(Row)`
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   align-items: center;
-  width: 90%;
   ${AnimalCard} {
-    min-width: 300px;
+    flex: 0 1 400px;
+    margin: 0.5rem auto;
   }
-`;
-
-const ListRoot = styled(Column)`
-    width: 100%;
-    height: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    ${AnimalRow} + ${AnimalRow} {
-        margin-top: 2rem;
-    }
 `;

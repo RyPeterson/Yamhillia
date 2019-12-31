@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+import shuffle from "lodash/shuffle";
 import Animal from "../models/Animal";
 import AnimalSpecies from "../models/AnimalSpecies";
 import Genders from "../models/Genders";
@@ -21,7 +22,7 @@ function generateAnimals(count: number): Animal[] {
       }
     }
   }
-  return animals;
+  return shuffle(animals);
 }
 
 const mockAnimals: Animal[] = generateAnimals(123);

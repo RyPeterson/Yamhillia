@@ -1,7 +1,8 @@
 enum Genders {
   MALE = "Male",
   FEMALE = "Female",
-  OTHER = "Other"
+  OTHER = "Other",
+  NEUTERED = "Neutered"
 }
 
 export default Genders;
