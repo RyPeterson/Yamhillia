@@ -13,5 +13,9 @@ namespace YamhilliaNET.Data
         {
 
         }
+
+        public DbSet<Farm> Farms { set; get; }
+
+        public DbSet<Animal> Animals { set; get; }
     }
 }

@@ -4,6 +4,6 @@ namespace YamhilliaNET.Models
 {
     public class YamhilliaUser : IdentityUser
     {
-
+        public virtual Farm Farm { set; get; }
     }
 }
