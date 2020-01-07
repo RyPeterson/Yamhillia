@@ -9,6 +9,8 @@ namespace YamhilliaNET.Models
     {
         public string Name { set; get; }
 
+        public string Key { set; get; }
+
         public virtual IEnumerable<YamhilliaUser> Users { set; get; }
 
         public virtual IEnumerable<Animal> Animals { set; get;}

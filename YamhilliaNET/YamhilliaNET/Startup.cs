@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using YamhilliaNET.Services.User;
 using YamhilliaNET.Models;
+using YamhilliaNET.Services;
 
 namespace YamhilliaNET
 {
@@ -46,6 +47,7 @@ namespace YamhilliaNET
             services.AddSingleton(provider => Configuration);
             services.AddTransient<Services.Auth.IAuthenticationService, Services.Auth.AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFarmService, FarmService>();
         }
 
         protected virtual void ConfigureAuth(IServiceCollection services)

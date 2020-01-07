@@ -4,24 +4,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YamhilliaNET.Models
 {
-    public interface YamhilliaModel<PKey>
+    public interface YamhilliaModel
     {
-        PKey Id { set; get; }
+        long Id { set; get; }
 
         DateTime CreatedAt { get; set; }
 
         DateTime UpdatedAt { get; set; }
     }
 
-    public abstract class AbstractYamhilliaModel : YamhilliaModel<long>
+    public abstract class AbstractYamhilliaModel : YamhilliaModel
     {
         [Key]
         public long Id { set; get; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        
         public DateTime CreatedAt { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        
         public DateTime UpdatedAt { get; set; }
     }
 }

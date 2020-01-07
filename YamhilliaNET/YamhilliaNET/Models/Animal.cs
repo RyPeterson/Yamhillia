@@ -16,5 +16,7 @@ namespace YamhilliaNET.Models
         public DateTime? DateOfDeath { set; get;}
  
         public virtual Farm Farm { set; get; }
+
+        public long FarmId { set; get;}
     }
 }

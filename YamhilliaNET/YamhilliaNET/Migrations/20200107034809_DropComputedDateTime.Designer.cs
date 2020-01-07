@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YamhilliaNET.Data;
@@ -9,9 +10,10 @@ using YamhilliaNET.Data;
 namespace YamhilliaNET.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200107034809_DropComputedDateTime")]
+    partial class DropComputedDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,10 +219,10 @@ namespace YamhilliaNET.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2020, 1, 7, 3, 48, 9, 644, DateTimeKind.Unspecified).AddTicks(6390),
+                            CreatedAt = new DateTime(2020, 1, 7, 3, 48, 9, 644, DateTimeKind.Utc).AddTicks(6393),
                             Key = "DEFAULT",
                             Name = "Default Farm",
-                            UpdatedAt = new DateTime(2020, 1, 7, 3, 48, 9, 644, DateTimeKind.Unspecified).AddTicks(6390)
+                            UpdatedAt = new DateTime(2020, 1, 7, 3, 48, 9, 644, DateTimeKind.Utc).AddTicks(6662)
                         });
                 });
 
