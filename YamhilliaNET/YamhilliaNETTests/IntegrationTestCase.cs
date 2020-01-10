@@ -120,6 +120,11 @@ namespace YamhilliaNETTests
             });
         }
 
+        protected async Task<Farm> GetDefaultFarm()
+        {
+            return await GetService<IFarmService>().GetFarmByKey(DefaultFarm.DefaultFarmKey);
+        }
+
 
         public class TestConfiguration
         {

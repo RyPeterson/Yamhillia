@@ -48,6 +48,7 @@ namespace YamhilliaNET
             services.AddTransient<Services.Auth.IAuthenticationService, Services.Auth.AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFarmService, FarmService>();
+            services.AddTransient<IAnimalService, AnimalService>();
         }
 
         protected virtual void ConfigureAuth(IServiceCollection services)
