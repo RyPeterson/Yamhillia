@@ -18,10 +18,10 @@ namespace YamhilliaNET.Models
         [Key]
         public long Id { set; get; }
 
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreatedAt { get; set; }
 
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdatedAt { get; set; }
     }
 }

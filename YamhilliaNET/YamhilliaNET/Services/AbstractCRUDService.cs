@@ -41,13 +41,6 @@ namespace YamhilliaNET.Services
             {
                 Nope("model");
             }
-            /* 
-                Docs suggest Npgsql doesn't actually set these via the computed.
-                This is just to report history of the object, so its not 100% important that these be exact
-            */
-            var now = DateTime.UtcNow;
-            model.CreatedAt = now;
-            model.UpdatedAt = now;
 
             var trackedModel = _table.Add(model);
             await Commit();
@@ -80,8 +73,6 @@ namespace YamhilliaNET.Services
         
         public virtual async Task<T> Update(T model)
         {
-            // See the Create method re: Npgsql
-            model.UpdatedAt = DateTime.UtcNow;
             var updated = _table.Update(model);
             await Commit();
             return updated.Entity;

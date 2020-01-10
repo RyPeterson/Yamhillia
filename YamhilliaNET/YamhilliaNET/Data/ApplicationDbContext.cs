@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using YamhilliaNET.Models;
 using YamhilliaNET.Constants;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace YamhilliaNET.Data
 {
@@ -19,7 +20,25 @@ namespace YamhilliaNET.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Farm>().HasIndex(f => f.Key).IsUnique();
+            ConfigureCreatedAndUpdatedAt(modelBuilder);
             Seed(modelBuilder);
+        }
+
+        private void ConfigureCreatedAndUpdatedAt(ModelBuilder modelBuilder)
+        {
+            ConfigureCreatedAndUpdatedAt(modelBuilder.Entity<Farm>());
+            ConfigureCreatedAndUpdatedAt(modelBuilder.Entity<Animal>());
+        }
+
+        private void ConfigureCreatedAndUpdatedAt<T>(EntityTypeBuilder<T> entityTypeBuilder) where T: AbstractYamhilliaModel
+        {
+            entityTypeBuilder
+                .Property(p => p.CreatedAt)
+                .HasDefaultValueSql("current_timestamp");
+            entityTypeBuilder
+                .Property(p => p.UpdatedAt)
+                .HasDefaultValueSql("current_timestamp");
+            entityTypeBuilder.Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate();
         }
 
         protected virtual void Seed(ModelBuilder builder)
