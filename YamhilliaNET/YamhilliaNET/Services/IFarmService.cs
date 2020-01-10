@@ -9,5 +9,7 @@ namespace YamhilliaNET.Services
         Task<IEnumerable<YamhilliaUser>> GetMembers(long farmId);
 
         Task<IEnumerable<Animal>> GetAnimals(long farmId);
+
+        Task<Farm> GetFarmByKey(string farmKey);
     }
 }

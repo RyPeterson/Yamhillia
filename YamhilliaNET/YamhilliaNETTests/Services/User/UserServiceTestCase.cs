@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using YamhilliaNET.Models;
+using YamhilliaNET.Services;
 using YamhilliaNET.Services.User;
 
 namespace YamhilliaNETTests.Services.User
@@ -30,6 +32,42 @@ namespace YamhilliaNETTests.Services.User
             Assert.NotNull(created);
             var dbCheck = await GetApplicationDbContext().Users.Where(u => u.Email == user.Email).FirstAsync();
             Assert.NotNull(dbCheck);
+        }
+
+        [Fact]
+        public async void TestCreate_AddsToDefaultFarm()
+        {
+            var user = new CreateUserModel()
+            {
+                Email = $"{new Guid().ToString()}@test.com",
+                FirstName = "Test",
+                Password = UNIVERSAL_USER_PASSWORD,
+                LastName = "User"
+            };  
+
+            var created = await service.Create(user);
+            Assert.NotNull(created);
+            var dbCheck = await GetApplicationDbContext().Users.Where(u => u.Email == user.Email).Include(u => u.Farm).FirstAsync();
+            Assert.NotNull(dbCheck.Farm);
+        }
+
+        [Fact]
+        public async void TestCreate_AddsToSpecifiedFarm()
+        {
+            var farm = await GetService<IFarmService>().Create(new Farm() { Name = "Test"});
+            var user = new CreateUserModel()
+            {
+                Email = $"{new Guid().ToString()}@test.com",
+                FirstName = "Test",
+                Password = UNIVERSAL_USER_PASSWORD,
+                LastName = "User",
+                FarmKey = farm.Key,
+            };  
+
+            var created = await service.Create(user);
+            Assert.NotNull(created);
+            var dbCheck = await GetApplicationDbContext().Users.Where(u => u.Email == user.Email).Include(u => u.Farm).FirstAsync();
+            Assert.Equal(dbCheck.FarmId, farm.Id);
         }
 
         [Fact]

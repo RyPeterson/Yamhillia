@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using YamhilliaNET.Data;
 using YamhilliaNET.Models;
 using Microsoft.EntityFrameworkCore;
+using YamhilliaNET.Utils;
 
 namespace YamhilliaNET.Services
 {
@@ -64,6 +65,16 @@ namespace YamhilliaNET.Services
                 }
                 throw new InvalidOperationException("Attempted to create farm with existing key");
             }
+        }
+
+        public async Task<Farm> GetFarmByKey(string farmKey)
+        {
+            if(string.IsNullOrEmpty(farmKey))
+            {
+                return null;
+            }
+
+            return await _table.Where(f => f.Key == farmKey).FirstOrDefaultAsync();
         }
     }
 }

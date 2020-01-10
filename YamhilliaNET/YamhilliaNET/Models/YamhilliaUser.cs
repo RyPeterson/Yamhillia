@@ -6,6 +6,6 @@ namespace YamhilliaNET.Models
     {
         public virtual Farm Farm { set; get; }
 
-        public long FarmId { set; get;}
+        public long? FarmId { set; get;}
     }
 }

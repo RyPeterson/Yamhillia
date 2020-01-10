@@ -21,8 +21,8 @@ namespace YamhilliaNETTests.Services
         {
             var farm = await service.Create(new Farm() {Name= "Test"});
             Assert.True(farm.Id > 1);
-            Assert.NotNull(farm.CreatedAt);
-            Assert.NotNull(farm.UpdatedAt);
+            Assert.True(farm.CreatedAt > new DateTime(0));
+            Assert.True(farm.UpdatedAt > new DateTime(0));
         }
 
         [Fact]
@@ -82,6 +82,16 @@ namespace YamhilliaNETTests.Services
 
             var list2 = (await service.Get(new GetOptions() { Limit = 2})).ToList();
             Assert.Equal(2, list2.Count);
+        }
+
+        [Fact]
+        public async void TestGetFarmByKey()
+        {
+            await service.Create(new Farm() {Name= "Test"});
+            await service.Create(new Farm() {Name= "Test"});
+            var thisFarm = await service.Create(new Farm() {Name= "Test"});
+            var farm = await service.GetFarmByKey(thisFarm.Key);
+            Assert.Equal(thisFarm.Id, farm.Id);
         }
         
     }

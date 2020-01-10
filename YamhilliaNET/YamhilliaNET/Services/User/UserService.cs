@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using YamhilliaNET.Constants;
 using YamhilliaNET.Models;
 
 namespace YamhilliaNET.Services.User
@@ -7,10 +8,12 @@ namespace YamhilliaNET.Services.User
     public class UserService : IUserService
     {
         private readonly UserManager<YamhilliaUser> userManager;
+        private readonly IFarmService farmService;
 
-        public UserService(UserManager<YamhilliaUser> userManager)
+        public UserService(UserManager<YamhilliaUser> userManager, IFarmService farmService)
         {
             this.userManager = userManager;
+            this.farmService = farmService;
         }
 
         public async Task<YamhilliaUser> Create(CreateUserModel createUserModel)
@@ -29,7 +32,20 @@ namespace YamhilliaNET.Services.User
             var result = await userManager.CreateAsync(yamhilliaUser, createUserModel.Password);
             if(result.Succeeded)
             {
-                return await userManager.FindByEmailAsync(createUserModel.Email);
+                var farmKey = createUserModel.FarmKey;
+                if(string.IsNullOrEmpty(farmKey)) 
+                {
+                    farmKey = DefaultFarm.DefaultFarmKey;
+                }
+
+                var createdUser = await userManager.FindByEmailAsync(createUserModel.Email);
+                var farm = await farmService.GetFarmByKey(farmKey);
+                if(farm != null)
+                {
+                    createdUser.FarmId = farm.Id;
+                    await userManager.UpdateAsync(createdUser);
+                }
+                return createdUser;
             }
             throw new InvalidUserNameOrPasswordException();
         }
