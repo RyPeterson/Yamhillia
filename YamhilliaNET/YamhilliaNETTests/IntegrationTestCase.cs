@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System.Xml;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -109,20 +110,30 @@ namespace YamhilliaNETTests
             return serviceProvider.GetService<T>();
         }
 
-        protected async Task<YamhilliaUser> CreateUser()
+        protected async Task<YamhilliaUser> CreateUser(Farm farm = null)
         {
             return await GetService<IUserService>().Create(new CreateUserModel()
             {
-                Email = $"{new Guid().ToString()}@test.com",
+                Email = $"{Guid.NewGuid().ToString()}@test.com",
                 FirstName = "Test",
                 Password = UNIVERSAL_USER_PASSWORD,
-                LastName = "User"
+                LastName = "User",
+                FarmKey = farm != null ? farm.Key : null 
             });
         }
 
         protected async Task<Farm> GetDefaultFarm()
         {
             return await GetService<IFarmService>().GetFarmByKey(DefaultFarm.DefaultFarmKey);
+        }
+
+        protected async Task<Farm> CreateFarm()
+        {
+            return await GetService<IFarmService>().Create(new Farm()
+            {
+                Name = Guid.NewGuid().ToString(),
+                Key = Guid.NewGuid().ToString()
+            });
         }
 
 

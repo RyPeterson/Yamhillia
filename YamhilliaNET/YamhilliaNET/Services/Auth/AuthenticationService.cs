@@ -65,5 +65,20 @@ namespace YamhilliaNET.Services.Auth
                 Token = new JwtSecurityTokenHandler().WriteToken(token)
             };
         }
+
+        public async Task<YamhilliaUser> GetUserFromContext(ClaimsPrincipal contextUser)
+        {
+            if(contextUser != null)
+            {
+                var id = contextUser.FindFirstValue(ClaimTypes.NameIdentifier);
+                if(!string.IsNullOrEmpty(id))
+                {
+                    return await userService.GetUserById(id);
+                }
+            }
+
+            return null;
+        }
+
     }
 }

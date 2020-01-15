@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using YamhilliaNET.Constants;
 using YamhilliaNET.Models;
+using YamhilliaNET.Utils;
 
 namespace YamhilliaNET.Services.User
 {
@@ -29,23 +30,25 @@ namespace YamhilliaNET.Services.User
                 UserName = createUserModel.Email,
                 Email = createUserModel.Email,
             };
+            var farmKey = createUserModel.FarmKey;
+            if(string.IsNullOrEmpty(farmKey)) 
+            {
+                farmKey = DefaultFarm.DefaultFarmKey;
+            }
+
+            var farm = await farmService.GetFarmByKey(farmKey);
+            if(farm != null)
+            {
+                yamhilliaUser.FarmId = farm.Id;
+            }
+            else 
+            {
+                YamhilliaExceptions.NotFound($"Farm with key ${farmKey} not found");
+            }
             var result = await userManager.CreateAsync(yamhilliaUser, createUserModel.Password);
             if(result.Succeeded)
             {
-                var farmKey = createUserModel.FarmKey;
-                if(string.IsNullOrEmpty(farmKey)) 
-                {
-                    farmKey = DefaultFarm.DefaultFarmKey;
-                }
-
-                var createdUser = await userManager.FindByEmailAsync(createUserModel.Email);
-                var farm = await farmService.GetFarmByKey(farmKey);
-                if(farm != null)
-                {
-                    createdUser.FarmId = farm.Id;
-                    await userManager.UpdateAsync(createdUser);
-                }
-                return createdUser;
+                return await userManager.FindByEmailAsync(createUserModel.Email);
             }
             throw new InvalidUserNameOrPasswordException();
         }

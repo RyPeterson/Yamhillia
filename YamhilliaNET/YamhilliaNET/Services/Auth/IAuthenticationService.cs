@@ -1,4 +1,5 @@
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using YamhilliaNET.Models;
 
@@ -11,6 +12,8 @@ namespace YamhilliaNET.Services.Auth
          Task<UserAndToken> Login(LoginModel loginModel);
 
          UserAndToken Login(YamhilliaUser user);
+
+         Task<YamhilliaUser> GetUserFromContext(ClaimsPrincipal contextUser);
     }   
 
 }

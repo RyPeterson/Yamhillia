@@ -24,5 +24,9 @@ namespace YamhilliaNET.Models
         public long FarmId { set; get;}
 
         public string CustomIdentifier { set; get;}
+
+        public virtual YamhilliaUser CreatedBy { set; get;}
+
+        public string CreatedById { set; get;}
     }
 }

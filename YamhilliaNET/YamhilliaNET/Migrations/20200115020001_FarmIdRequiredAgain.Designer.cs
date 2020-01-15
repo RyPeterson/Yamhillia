@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YamhilliaNET.Data;
@@ -9,9 +10,10 @@ using YamhilliaNET.Data;
 namespace YamhilliaNET.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200115020001_FarmIdRequiredAgain")]
+    partial class FarmIdRequiredAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,9 +163,6 @@ namespace YamhilliaNET.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("current_timestamp");
 
-                    b.Property<string>("CreatedById")
-                        .HasColumnType("text");
-
                     b.Property<string>("CustomIdentifier")
                         .HasColumnType("text");
 
@@ -192,8 +191,6 @@ namespace YamhilliaNET.Migrations
                         .HasDefaultValueSql("current_timestamp");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("FarmId");
 
@@ -363,10 +360,6 @@ namespace YamhilliaNET.Migrations
 
             modelBuilder.Entity("YamhilliaNET.Models.Animal", b =>
                 {
-                    b.HasOne("YamhilliaNET.Models.YamhilliaUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
                     b.HasOne("YamhilliaNET.Models.Farm", "Farm")
                         .WithMany("Animals")
                         .HasForeignKey("FarmId")
