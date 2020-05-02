@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Redirect, RouterProps } from "react-router";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import yamhilliaApi from "../api/yamhilliaApi";
 import Button from "../components/Button";
 import Column from "../components/Column";

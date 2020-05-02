@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import Row from "./Row";
 import Column from "./Column";
@@ -18,6 +18,11 @@ const NavBar: FC = props => {
         <NavItem>
           <Link to="/">Home</Link>
         </NavItem>
+        {user !== null ? (
+          <NavItem>
+            <Link to="/animals">Animals</Link>
+          </NavItem>
+        ) : null}
       </NavItems>
       {user !== null ? (
         <UserOperations>

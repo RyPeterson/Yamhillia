@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Profile from "./pages/Profile";
 import Playground from "./pages/Playground";
+import Animals from "./pages/Animals";
 
 const App: React.FC = () => (
   <Router>
@@ -25,6 +26,9 @@ const App: React.FC = () => (
       </Route>
       <Route exact path="/profile">
         <Profile />
+      </Route>
+      <Route exact path="/animals">
+        <Animals />
       </Route>
       {process.env.NODE_ENV === "development" && (
         <Route exact path="/playground">

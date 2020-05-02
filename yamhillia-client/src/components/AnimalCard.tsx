@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import GenderIcons, { GenderIconBase } from "../constants/genderIcons";
 import theme, { foreground } from "../constants/theme";
 import Animal from "../models/Animal";

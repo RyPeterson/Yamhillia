@@ -36,7 +36,6 @@ namespace YamhilliaNET.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        [Route("animals")]
         public async Task<ActionResult<IEnumerable<Animal>>> Get()
         {
             var user = await authenticationService.GetUserFromContext(User);

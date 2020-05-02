@@ -4,7 +4,7 @@ import {
   RouteChildrenProps,
   RouteComponentProps
 } from "react-router";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import isEmail from "validator/lib/isEmail";
 import isEmpty from "validator/lib/isEmpty";
 import yamhilliaApi from "../api/yamhilliaApi";

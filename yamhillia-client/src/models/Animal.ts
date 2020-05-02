@@ -7,4 +7,7 @@ export default interface Animal extends Model {
   species: AnimalSpecies;
   gender: Genders;
   image: string | null;
+  customIdentifier: string | null;
+  dateOfBirth: string | null;
+  dateOfDeath: string | null;
 }

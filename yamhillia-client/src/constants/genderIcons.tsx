@@ -6,7 +6,7 @@ import {
   faNeuter
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import Genders from "../models/Genders";
 import theme from "./theme";
 

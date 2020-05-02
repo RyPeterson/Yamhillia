@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using YamhilliaNET.Models;
 using YamhilliaNET.Services.Auth;
 using YamhilliaNET.Services.User;
+using YamhilliaNET.ViewModels;
 
 namespace YamhilliaNET.Controllers
 {
@@ -69,8 +70,9 @@ namespace YamhilliaNET.Controllers
             {
                 var user = await userService.Create(createUserModel);
                 user.PasswordHash = "";
+                user.Farm = null;
                 var userAndToken = authService.Login(user);
-                return Ok(new { token = userAndToken.Token, user = userAndToken.User });
+                return Ok(new { token = userAndToken.Token, user = new YamhilliaUserViewModel(userAndToken.User) });
             }
             catch(InvalidUserNameOrPasswordException)
             {

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import Column from "../components/Column";
 import NavBar from "../components/NavBar";
 import theme, { background } from "../constants/theme";

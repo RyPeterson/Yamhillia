@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import AnimalSpecies from "../models/AnimalSpecies";
 import defaultAnimalImages from "../constants/defaultAnimalImages";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 interface AnimalImageProps {
   image: string | null;

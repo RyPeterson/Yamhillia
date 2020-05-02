@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components/macro";
 import Column from "./Column";
 import { MoonLoader } from "react-spinners";
 

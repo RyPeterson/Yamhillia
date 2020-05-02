@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import Animal from "../models/Animal";
 import AnimalCard from "./AnimalCard";
 import Row from "./Row";
