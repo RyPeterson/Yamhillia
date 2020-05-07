@@ -68,7 +68,12 @@ namespace YamhilliaNETTests
             services.AddDbContext<YamhilliaContext>(options =>
                 options.UseSqlite(builder.ToString()));
         }
-        
+
+        protected override void ConfigureAuthentication(IServiceCollection services)
+        {
+            // lol
+        }
+
         protected YamhilliaContext GetDbContext()
         {
             if (!configured)

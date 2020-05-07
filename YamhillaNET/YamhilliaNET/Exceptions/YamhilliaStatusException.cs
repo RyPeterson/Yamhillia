@@ -5,6 +5,9 @@ namespace YamhillaNET.Exceptions
     public class YamhilliaStatusException: YamhilliaException
     {
         private readonly int _status;
+
+        public int Status => _status;
+
         protected YamhilliaStatusException(string? message, int status) : base(message)
         {
             _status = status;
