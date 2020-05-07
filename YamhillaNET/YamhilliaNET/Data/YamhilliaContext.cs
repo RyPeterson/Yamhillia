@@ -13,7 +13,8 @@ namespace YamhillaNET.Data
         {
             // Only for migration design time 
         }
-        public YamhilliaContext(DbContextOptions<YamhilliaContext> options) : base(options)
+        
+        public YamhilliaContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -68,7 +69,7 @@ namespace YamhillaNET.Data
         {
             
         }
-        public PostgresYamhilliaContext(DbContextOptions<YamhilliaContext> options) : base(options)
+        public PostgresYamhilliaContext(DbContextOptions options) : base(options)
         {
             
         }
@@ -81,7 +82,7 @@ namespace YamhillaNET.Data
             
         }
         
-        public SqliteYamhilliaContext(DbContextOptions<YamhilliaContext> options) : base(options)
+        public SqliteYamhilliaContext(DbContextOptions options) : base(options)
         {
             
         }

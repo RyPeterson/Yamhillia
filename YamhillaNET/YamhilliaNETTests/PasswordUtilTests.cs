@@ -32,5 +32,23 @@ namespace YamhilliaNETTests
             Assert.False(PasswordUtil.Verify("password", hash2, salt1));
 
         }
+
+        [Fact]
+        public void TestStrength()
+        {
+            Assert.False(PasswordUtil.IsStrongEnough(null));
+            Assert.False(PasswordUtil.IsStrongEnough(""));
+            Assert.False(PasswordUtil.IsStrongEnough("        "));
+            Assert.False(PasswordUtil.IsStrongEnough("1234567"));
+            Assert.False(PasswordUtil.IsStrongEnough("12345678"));
+            // Only 2 requirement
+            Assert.False(PasswordUtil.IsStrongEnough("1234567m"));
+            // 3 requirements
+            Assert.False(PasswordUtil.IsStrongEnough("123456Mm"));
+            
+            Assert.True(PasswordUtil.IsStrongEnough("12345*Mm"));
+            
+            Assert.True(PasswordUtil.IsStrongEnough("Password1@"));
+        }
     }
 }

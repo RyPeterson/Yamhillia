@@ -2,15 +2,56 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1280720d_002D4c19_002D4b4e_002Da016_002D75da97b0ac16/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="False" ContinuousTestingMode="0" FrameworkVersion="{x:Null}" IsLocked="False" Name="TestSetUp" PlatformMonoPreference="{x:Null}" PlatformType="{x:Null}" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;Or&gt;
     &lt;Or&gt;
+      &lt;Or&gt;
+        &lt;TestAncestor&gt;
+          &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Data.YamhilliaContextTests&lt;/TestId&gt;
+        &lt;/TestAncestor&gt;
+        &lt;TestAncestor&gt;
+          &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.PasswordUtilTests.TestHashesAreUnique&lt;/TestId&gt;
+        &lt;/TestAncestor&gt;
+      &lt;/Or&gt;
       &lt;TestAncestor&gt;
-        &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Data.YamhilliaContextTests&lt;/TestId&gt;
-      &lt;/TestAncestor&gt;
-      &lt;TestAncestor&gt;
-        &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.PasswordUtilTests.TestHashesAreUnique&lt;/TestId&gt;
+        &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.PasswordUtilTests.TestVerify&lt;/TestId&gt;
       &lt;/TestAncestor&gt;
     &lt;/Or&gt;
     &lt;TestAncestor&gt;
-      &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.PasswordUtilTests.TestVerify&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Util.StringEnumerationTestCase&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
   &lt;/Or&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7200bbe8_002D22b1_002D4583_002D834e_002Db64e02091ae7/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="False" ContinuousTestingMode="0" FrameworkVersion="{x:Null}" IsLocked="False" Name="TestCompares" PlatformMonoPreference="{x:Null}" PlatformType="{x:Null}" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
+  &lt;Or&gt;
+    &lt;Or&gt;
+      &lt;Or&gt;
+        &lt;TestAncestor&gt;
+          &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Util.StringEnumerationTestCase&lt;/TestId&gt;
+        &lt;/TestAncestor&gt;
+        &lt;TestAncestor&gt;
+          &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Test.TestSetup&lt;/TestId&gt;
+        &lt;/TestAncestor&gt;
+      &lt;/Or&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Services.User.UserServiceTestCase.Test_CreateUser&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+    &lt;/Or&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.PasswordUtilTests.TestStrength&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+  &lt;/Or&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bde7d0d9_002Da1fb_002D430e_002Db4b4_002D624aa2f9a047/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="False" ContinuousTestingMode="0" FrameworkVersion="{x:Null}" IsLocked="False" Name="TestSetup" PlatformMonoPreference="{x:Null}" PlatformType="{x:Null}" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
+  &lt;Or&gt;
+    &lt;Or&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Test.TestSetup&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Services.User.UserServiceTestCase.Test_CreateUser_InvalidEmail&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+    &lt;/Or&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Services.User.UserServiceTestCase&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+  &lt;/Or&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Yamhillia/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

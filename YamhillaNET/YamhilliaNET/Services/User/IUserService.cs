@@ -1,0 +1,45 @@
+using System.Threading.Tasks;
+using YamhillaNET.Models;
+
+namespace YamhillaNET.Services.User
+{
+    public interface IUserService
+    {
+        /// <summary>
+        /// Authenticate a user given their username and password.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>The user if authorized, or null if not</returns>
+        Task<Models.User> Authenticate(string username, string password);
+
+        /// <summary>
+        /// Create a new user with the given data.
+        /// </summary>
+        /// <param name="createUser"></param>
+        /// <returns></returns>
+        Task<Models.User> CreateUser(CreateUser createUser);
+
+
+        /// <summary>
+        /// Update an existing user
+        /// </summary>
+        /// <param name="updateUser"></param>
+        /// <returns></returns>
+        Task<Models.User> UpdateUser(UpdateUser updateUser);
+
+        /// <summary>
+        /// Get a user given their username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>The user if they exist or null if not</returns>
+        Task<Models.User> GetUserByUsername(string username);
+
+        /// <summary>
+        /// Get a user given their database id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The user if they exist or null if not</returns>
+        Task<Models.User> GetUserById(long id);
+    }
+}

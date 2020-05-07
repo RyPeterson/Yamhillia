@@ -17,4 +17,8 @@
       <ProjectReference Include="..\YamhilliaNET\YamhilliaNET.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="test-appsettings.json" />
+    </ItemGroup>
+
 </Project>

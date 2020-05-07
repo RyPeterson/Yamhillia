@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Generate two migrations, one for Postgres and one for SQLite
-dotnet ef migrations add $1 --context DesignTimePostrgresContext --output-dir Migrations/PostgresMigrations
+dotnet ef migrations add $1 --context PostgresYamhilliaContext --output-dir Migrations/PostgresMigrations
 
 # Pushing through the update will fail if a foreign key is modified (known issue with SQLite)
 # When this happens: https://stackoverflow.com/a/41942557

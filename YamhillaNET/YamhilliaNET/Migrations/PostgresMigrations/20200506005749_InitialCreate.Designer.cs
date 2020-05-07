@@ -2,16 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YamhillaNET.Data;
 
 namespace YamhillaNET.Migrations.PostgresMigrations
 {
-    [DbContext(typeof(DesignTimePostrgresContext))]
-    partial class DesignTimePostrgresContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PostgresYamhilliaContext))]
+    [Migration("20200506005749_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
