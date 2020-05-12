@@ -39,6 +39,7 @@ namespace YamhillaNET.Data
                 var now = DateTime.UtcNow;
                 E.Property("CreatedAt").CurrentValue = now;
                 E.Property("UpdatedAt").CurrentValue = now;
+                E.Property("EntityUUID").CurrentValue = Guid.NewGuid().ToString();
             });
 
             var editedEntities = ChangeTracker.Entries()
@@ -59,6 +60,7 @@ namespace YamhillaNET.Data
             modelBuilder.Entity<User>()
                 .HasIndex(p => new { p.Username })
                 .IsUnique();
+            modelBuilder.Entity<User>().HasIndex(p => p.EntityUUID).IsUnique();
         }
 
     }

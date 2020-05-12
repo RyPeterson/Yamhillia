@@ -28,6 +28,7 @@
     &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Services.User.AuthenticationServiceTestCase.Test_Authenticate_Success&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Services.User.AuthenticationServiceTestCase&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Constants.SpeciesTestCase&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::.NETCoreApp,Version=v3.1::YamhilliaNETTests.Data.YamhilliaContextTests.TestSetUp&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Yamhillia/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

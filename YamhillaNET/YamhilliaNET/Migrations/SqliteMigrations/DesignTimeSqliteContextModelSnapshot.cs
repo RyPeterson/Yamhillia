@@ -16,13 +16,18 @@ namespace YamhillaNET.Migrations.SqliteMigrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
-            modelBuilder.Entity("YamhillaNET.Models.User", b =>
+            modelBuilder.Entity("YamhillaNET.Models.Entities.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EntityUUID")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
@@ -41,6 +46,9 @@ namespace YamhillaNET.Migrations.SqliteMigrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EntityUUID")
+                        .IsUnique();
 
                     b.HasIndex("Username")
                         .IsUnique();

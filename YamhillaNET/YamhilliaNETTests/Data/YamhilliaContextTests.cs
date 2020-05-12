@@ -20,7 +20,7 @@ namespace YamhilliaNETTests.Data
                 
                 var added = db.Users.Add(new User()
                 {
-                    Username = "Test",
+                    Username = $@"Test{Guid.NewGuid().ToString()}@test.com",
                     PasswordHash = hash,
                     PasswordSalt = salt
                 });
@@ -29,6 +29,7 @@ namespace YamhilliaNETTests.Data
                 Assert.NotNull(user);
                 Assert.NotEqual(user.CreatedAt, DateTime.MinValue);
                 Assert.NotEqual(user.UpdatedAt, DateTime.MinValue);
+                Assert.NotEmpty(user.EntityUUID);
             }
         }
     }
