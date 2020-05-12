@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YamhillaNET.Models
+namespace YamhillaNET.Models.Entities
 {
     public interface IYamhilliaModel
     {

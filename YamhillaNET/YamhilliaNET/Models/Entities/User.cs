@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace YamhillaNET.Models
+namespace YamhillaNET.Models.Entities
 {
     public class User: AbstractYamhilliaModel
     {

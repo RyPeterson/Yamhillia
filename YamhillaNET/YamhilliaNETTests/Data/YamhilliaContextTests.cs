@@ -2,6 +2,7 @@ using System;
 using System.Security.Policy;
 using Xunit;
 using YamhillaNET.Models;
+using YamhillaNET.Models.Entities;
 using YamhillaNET.Util;
 
 namespace YamhilliaNETTests.Data

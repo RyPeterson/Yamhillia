@@ -1,6 +1,6 @@
 using System;
 
-namespace YamhillaNET.Models
+namespace YamhillaNET.Models.Entities
 {
     public abstract class AbstractYamhilliaModel : IYamhilliaModel
     {

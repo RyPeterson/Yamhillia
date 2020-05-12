@@ -1,4 +1,5 @@
 using YamhillaNET.Models;
+using YamhillaNET.Models.Entities;
 
 namespace YamhillaNET.ViewModels
 {

@@ -20,7 +20,7 @@ namespace YamhillaNET.Services.User
             _context = context;
         }
 
-        public async Task<Models.User> Authenticate(string username, string password)
+        public async Task<Models.Entities.User> Authenticate(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username))
             {
@@ -46,7 +46,7 @@ namespace YamhillaNET.Services.User
             return userByUsername;
         }
 
-        public async Task<Models.User> CreateUser(CreateUser createUser)
+        public async Task<Models.Entities.User> CreateUser(CreateUser createUser)
         {
             if (createUser == null)
             {
@@ -80,7 +80,7 @@ namespace YamhillaNET.Services.User
 
             byte[] passwordHash, passwordSalt;
             PasswordUtil.Hash(createUser.Password, out passwordHash, out passwordSalt);
-            var untracked = _context.Users.Add(new Models.User()
+            var untracked = _context.Users.Add(new Models.Entities.User()
             {
                 Username = createUser.Username,
                 PasswordHash = passwordHash,
@@ -90,7 +90,7 @@ namespace YamhillaNET.Services.User
             return untracked.Entity;
         }
 
-        public async Task<Models.User> UpdateUser(UpdateUser updateUser)
+        public async Task<Models.Entities.User> UpdateUser(UpdateUser updateUser)
         {
             if (updateUser == null)
             {
@@ -142,12 +142,12 @@ namespace YamhillaNET.Services.User
             return updated.Entity;
         }
 
-        public Task<Models.User> GetUserByUsername(string username)
+        public Task<Models.Entities.User> GetUserByUsername(string username)
         {
             return _context.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
         }
 
-        public async Task<Models.User> GetUserById(long id)
+        public async Task<Models.Entities.User> GetUserById(long id)
         {
             return await _context.Users.FindAsync(id);
         }

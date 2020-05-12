@@ -12,6 +12,7 @@ using Xunit;
 using YamhillaNET;
 using YamhillaNET.Data;
 using YamhillaNET.Models;
+using YamhillaNET.Models.Entities;
 using YamhillaNET.Services;
 using YamhillaNET.Services.User;
 
