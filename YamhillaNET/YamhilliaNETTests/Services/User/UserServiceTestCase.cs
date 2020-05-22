@@ -39,7 +39,7 @@ namespace YamhilliaNETTests.Services.User
                 Username = $@"TestUser{Guid.NewGuid().ToString()}",
                 Password = UNIVERSAL_USER_PASSWORD,
             };
-            await Assert.ThrowsAsync<YamhilliaBadRequestException>(() => _userService.CreateUser(userToCreate));
+            await Assert.ThrowsAsync<YamhilliaBadRequestError>(() => _userService.CreateUser(userToCreate));
         }
 
         [Fact]

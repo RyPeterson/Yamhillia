@@ -10,9 +10,9 @@ namespace YamhilliaNETTests.Constants
         [Fact]
         public void Test_ValueOf()
         {
-            Assert.Throws<YamhilliaNotFoundException>(() => Species.ValueOf("Nope"));
-            Assert.Throws<YamhilliaNotFoundException>(() => Species.ValueOf(""));
-            Assert.Throws<YamhilliaNotFoundException>(() => Species.ValueOf(null));
+            Assert.Throws<YamhilliaNotFoundError>(() => Species.ValueOf("Nope"));
+            Assert.Throws<YamhilliaNotFoundError>(() => Species.ValueOf(""));
+            Assert.Throws<YamhilliaNotFoundError>(() => Species.ValueOf(null));
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             foreach (var species in Species.SpeciesList)
             {

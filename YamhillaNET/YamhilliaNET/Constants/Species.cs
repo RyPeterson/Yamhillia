@@ -70,7 +70,7 @@ namespace YamhillaNET.Constants
                     return species;
                 }
             }
-            throw new YamhilliaNotFoundException(@$"{value} is not mapped to a species");
+            throw new YamhilliaNotFoundError(@$"{value} is not mapped to a species");
         }
     }
 }

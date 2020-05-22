@@ -27,7 +27,7 @@ namespace YamhillaNET.Services.User
             var user = await _userService.Authenticate(username, password);
             if (user == null)
             {
-                throw new YamhilliaBadRequestException("Invalid credentials");
+                throw new YamhilliaBadRequestError("Invalid credentials");
             }
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_appSettings.Secret);

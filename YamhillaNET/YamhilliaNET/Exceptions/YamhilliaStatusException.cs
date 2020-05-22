@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 
 namespace YamhillaNET.Exceptions
@@ -19,25 +20,25 @@ namespace YamhillaNET.Exceptions
         }
     }
 
-    public class YamhilliaNotFoundException: YamhilliaStatusException
+    public class YamhilliaNotFoundError: YamhilliaStatusException
     {
-        public YamhilliaNotFoundException(string? message) : base(message, 404)
+        public YamhilliaNotFoundError(string? message) : base(message, 404)
         {
             
         }
     }
     
-    public class YamhilliaBadRequestException: YamhilliaStatusException
+    public class YamhilliaBadRequestError: YamhilliaStatusException
     {
-        public YamhilliaBadRequestException(string? message) : base(message,400)
+        public YamhilliaBadRequestError(string? message) : base(message,400)
         {
             
         }
     }
 
-    public class YamhilliaForbiddenException : YamhilliaStatusException
+    public class YamhilliaForbiddenError : YamhilliaStatusException
     {
-        public YamhilliaForbiddenException(string? message) : base(message, 403)
+        public YamhilliaForbiddenError(string? message) : base(message, 403)
         {
             
         }

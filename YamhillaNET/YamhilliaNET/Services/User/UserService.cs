@@ -54,28 +54,28 @@ namespace YamhillaNET.Services.User
             }
             if (string.IsNullOrWhiteSpace(createUser.Username))
             {
-                throw new YamhilliaBadRequestException("Username is required");
+                throw new YamhilliaBadRequestError("Username is required");
             }
 
             if (string.IsNullOrWhiteSpace(createUser.Password))
             {
-                throw new YamhilliaBadRequestException("Password is required");
+                throw new YamhilliaBadRequestError("Password is required");
             }
 
             if (!PasswordUtil.IsStrongEnough(createUser.Password))
             {
-                throw new YamhilliaBadRequestException("Password is not strong enough.");
+                throw new YamhilliaBadRequestError("Password is not strong enough.");
             }
 
             if (!IsValidEmail(createUser.Username))
             {
-                throw new YamhilliaBadRequestException("Invalid email");
+                throw new YamhilliaBadRequestError("Invalid email");
             }
 
             var existing = await GetUserByUsername(createUser.Username);
             if (existing != null)
             {
-                throw new YamhilliaBadRequestException("Invalid username");
+                throw new YamhilliaBadRequestError("Invalid username");
             }
 
             byte[] passwordHash, passwordSalt;
@@ -98,34 +98,34 @@ namespace YamhillaNET.Services.User
             }
             if (updateUser.Username != null && string.IsNullOrWhiteSpace(updateUser.Username))
             {
-                throw new YamhilliaBadRequestException("Username is required");
+                throw new YamhilliaBadRequestError("Username is required");
             }
 
             if (updateUser.Password != null && string.IsNullOrWhiteSpace(updateUser.Password))
             {
-                throw new YamhilliaBadRequestException("Password is required");
+                throw new YamhilliaBadRequestError("Password is required");
             }
 
             if (updateUser.Password != null && !PasswordUtil.IsStrongEnough(updateUser.Password))
             {
-                throw new YamhilliaBadRequestException("Password is not strong enough.");
+                throw new YamhilliaBadRequestError("Password is not strong enough.");
             }
 
             if (!IsValidEmail(updateUser.Username))
             {
-                throw new YamhilliaBadRequestException("Invalid email");
+                throw new YamhilliaBadRequestError("Invalid email");
             }
 
             var userById = await GetUserById(updateUser.Id);
             if (userById == null)
             {
-                throw new YamhilliaNotFoundException("User Not Found");
+                throw new YamhilliaNotFoundError("User Not Found");
             }
 
             var existing = await GetUserByUsername(updateUser.Username);
             if (existing != null && existing.Id != userById.Id)
             {
-                throw new YamhilliaBadRequestException("Invalid username");
+                throw new YamhilliaBadRequestError("Invalid username");
             }
 
             userById.Username = updateUser.Username;
