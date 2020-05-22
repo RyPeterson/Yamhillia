@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using YamhillaNET.Data;
+using YamhillaNET.Data.Runtime;
 
 namespace YamhilliaNETTests
 {

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YamhillaNET.Data;
+using YamhillaNET.Data.Runtime;
 
 namespace YamhillaNET.Migrations.PostgresMigrations
 {

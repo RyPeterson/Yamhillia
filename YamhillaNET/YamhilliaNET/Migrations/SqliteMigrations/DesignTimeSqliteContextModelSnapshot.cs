@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YamhillaNET.Data;
+using YamhillaNET.Data.Design;
 
 namespace YamhillaNET.Migrations.SqliteMigrations
 {
