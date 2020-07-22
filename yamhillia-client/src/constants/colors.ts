@@ -1,21 +1,22 @@
 // Theme generated via https://coolors.co/
 export enum ThemeColor {
-  lightest = "#c8ffbe",
-  lighter = "#edffab",
-  base = "#ba9593",
-  dark = "#89608e",
-  darkest = "#623b5a",
+  lightest = "#C2D8B9",
+  lighter = "#E4F0D0",
+  base = "#FFFCF7",
+  dark = "#A1B5D8",
+  darkest = "#738290",
 }
 
 /**
  * Contrasting colors that are at least WCAG AA compliant based on the theme
  */
 export enum ThemeContrastColor {
-  contrastLightest = "#0A4200",
-  contrastLighter = "#0A4200",
-  contrastBase = "#000000",
-  contrastDark = "#FFFFFF",
-  contrastDarkest = "#FFFFFF",
+  // always has been
+  contrastLightest = "#12263A",
+  contrastLighter = "#12263A",
+  contrastBase = "#12263A",
+  contrastDark = "#12263A",
+  contrastDarkest = "#000000",
 }
 
 export const getContrastingColor = (

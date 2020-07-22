@@ -22,4 +22,22 @@ module.exports = function (plop) {
       },
     ],
   });
+
+  plop.setGenerator("page", {
+    description: "Create a page",
+    prompts: [
+      {
+        type: "input",
+        name: "name",
+        message: "Page name",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "src/pages/{{name}}.tsx",
+        templateFile: "plop-templates/page.hbs",
+      },
+    ],
+  });
 };

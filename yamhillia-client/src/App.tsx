@@ -1,8 +1,13 @@
 import React from "react";
-import Page from "./components/Page";
+import UnauthenticatedRoot from "./roots/UnauthenticatedRoot";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  return <Page title="Home">TODO</Page>;
+  return (
+    <BrowserRouter>
+      <UnauthenticatedRoot />
+    </BrowserRouter>
+  );
 }
 
 export default App;

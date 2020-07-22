@@ -1,4 +1,4 @@
-import React, { FC, ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components/macro";
 
 export type BlankButtonProps = ComponentPropsWithoutRef<"button">;
