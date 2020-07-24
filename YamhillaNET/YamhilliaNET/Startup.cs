@@ -25,6 +25,8 @@ namespace YamhillaNET
 {
     public class Startup
     {
+        private readonly string YamhilliaCorsOptions = "_yamhilliaCorsOptions";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,6 +42,7 @@ namespace YamhillaNET
                 ConfigureDatabase(services);
                 AddServices(services);
                 ConfigureAuthentication(services);
+                ConfigureCORS(services);
         }
         
 
@@ -127,10 +130,28 @@ namespace YamhillaNET
 
             app.UseRouting();
 
+            app.UseCors(YamhilliaCorsOptions);
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        public virtual void ConfigureCORS(IServiceCollection services)
+        {            
+            // Should be a semicolon separated list of strings
+            var corsSettings = Configuration.GetSection("AllowedConsumers").Value;
+            var consumers = corsSettings.Split(";");
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: YamhilliaCorsOptions, builder =>
+                {
+                    builder.WithOrigins(consumers)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
     }
 }
