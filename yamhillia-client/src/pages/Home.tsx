@@ -1,11 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import styled from "styled-components/macro";
 import PageProps from "../types/page/PageProps";
 import UnauthenticatedPage from "../components/UnauthenticatedPage";
+import { useSpinnerContext } from "../context/SpinnerContext";
 
-const Home: FC<PageProps> = (props) => {
+const Home: FC<PageProps> = ({ ...rest }) => {
+  const { ready } = useSpinnerContext();
+
+  useEffect(() => {
+    ready();
+  }, [ready]);
+
   return (
-    <UnauthenticatedPage {...props}>
+    <UnauthenticatedPage {...rest}>
       <PageContents />
     </UnauthenticatedPage>
   );

@@ -3,8 +3,14 @@ import styled from 'styled-components/macro';
 import Page from "../components/Page";
 import UnauthenticatedPage from '../components/UnauthenticatedPage';
 import AuthenticatedPage from '../components/AuthenticatedPage';
+import { useSpinnerContext } from "../context/SpinnerContext";
 
 const {{name}}: FC = props => {
+    const { ready } = useSpinnerContext();
+
+    useEffect(() => {
+        ready();
+    }, [ready]);
     return (
         <Page>TODO</Page>
     );

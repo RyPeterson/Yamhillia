@@ -13,5 +13,5 @@ export default function useAsyncEffect(
     return () => {
       mounted = false;
     };
-  }, [dependencies]);
+  }, [dependencies, effect]);
 }

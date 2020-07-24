@@ -3,25 +3,21 @@ import { home, logout } from "../constants/routes/shared";
 import Home from "../pages/Home";
 import React, { FC } from "react";
 import Logout from "../pages/Logout";
-import User from "../types/user/User";
-
-interface AuthenticatedRootProps {
-  user: User;
-}
+import { AuthenticatedRootProps } from "../types/page/RootProps";
 
 const AuthenticatedRoot: FC<AuthenticatedRootProps> = ({ user }) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={home}>
-          <Home />
+          <Home user={user} />
         </Route>
         <Route path={logout}>
           <Logout />
         </Route>
         {/* fallback */}
         <Route>
-          <Home />
+          <Home user={user} />
         </Route>
       </Switch>
     </BrowserRouter>

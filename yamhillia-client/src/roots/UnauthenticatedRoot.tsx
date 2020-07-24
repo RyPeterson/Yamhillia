@@ -5,8 +5,9 @@ import Home from "../pages/Home";
 import { login, register } from "../constants/routes/unauthenticatedRoutes";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import { UnauthenticatedRootProps } from "../types/page/RootProps";
 
-const UnauthenticatedRoot: FC = () => {
+const UnauthenticatedRoot: FC<UnauthenticatedRootProps> = () => {
   return (
     <BrowserRouter>
       <Switch>

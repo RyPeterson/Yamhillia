@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components/macro";
-import Page from "./Page";
-import { AuthenticatedPageProps } from "../types/page/PageProps";
+import Page, { PageComponentProps } from "./Page";
 import { NavigationItem } from "./Nav";
 
 const navigationItems: ReadonlyArray<NavigationItem> = [
@@ -9,7 +8,7 @@ const navigationItems: ReadonlyArray<NavigationItem> = [
   { label: "Animals", to: "/animals" },
 ];
 
-const AuthenticatedPage: FC<AuthenticatedPageProps> = (props) => {
+const AuthenticatedPage: FC<PageComponentProps> = (props) => {
   return <Page navigationItems={navigationItems} {...props} />;
 };
 

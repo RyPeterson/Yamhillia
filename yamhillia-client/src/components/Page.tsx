@@ -5,14 +5,14 @@ import { ThemeColor } from "../constants/colors";
 import Nav, { NavigationItem } from "./Nav";
 import User from "../types/user/User";
 
-interface PageProps {
+export interface PageComponentProps {
   title?: string;
   navigationItems?: ReadonlyArray<NavigationItem>;
   user?: User | null;
   hideNav?: boolean;
 }
 
-const Page: FC<PageProps> = ({
+const Page: FC<PageComponentProps> = ({
   title,
   navigationItems = [],
   user,
