@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import UnauthenticatedRoot from "./roots/UnauthenticatedRoot";
-import { BrowserRouter } from "react-router-dom";
+import User from "./types/user/User";
+import useAsyncEffect from "./hooks/utils/useAsyncEffect";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <UnauthenticatedRoot />
-    </BrowserRouter>
-  );
+  const [user, setUser] = useState<User | null>(null);
+
+  useAsyncEffect(async (isCancelled) => {}, []);
+
+  return <UnauthenticatedRoot />;
 }
 
 export default App;

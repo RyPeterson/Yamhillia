@@ -5,6 +5,8 @@ import Row from "./Row";
 import BlankButton from "./BlankButton";
 import { ThemeColor, ThemeContrastColor } from "../constants/colors";
 import User from "../types/user/User";
+import { login, register } from "../constants/routes/unauthenticatedRoutes";
+import { logout } from "../constants/routes/shared";
 
 export interface NavigationItem {
   label: string;
@@ -90,7 +92,7 @@ const AccountGroup = styled(Row)`
 const LoggedInNavigations: FC<{ user: User }> = ({ user }) => (
   <AccountGroup>
     <Link to="/profile">Welcome {user.email}</Link>
-    <Link to="/logout">
+    <Link to={logout}>
       <NavItem>Log Out</NavItem>
     </Link>
   </AccountGroup>
@@ -99,8 +101,9 @@ const LoggedInNavigations: FC<{ user: User }> = ({ user }) => (
 const NotLoggedInNavigations = () => (
   <AccountGroup>
     <Welcome>Welcome...</Welcome>
-    <Link to="/login">
+    <Link to={login}>
       <NavItem>Log In</NavItem>
     </Link>
+    <Link to={register}>Register</Link>
   </AccountGroup>
 );
