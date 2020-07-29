@@ -34,7 +34,7 @@ export const getContrastingColor = (
     case ThemeColor.lighter:
       return ThemeContrastColor.contrastLighter;
     default:
-      throw new Error(`${themeColor} does not have a contrasting color`);
+      return ThemeContrastColor.contrastBase;
   }
 };
 

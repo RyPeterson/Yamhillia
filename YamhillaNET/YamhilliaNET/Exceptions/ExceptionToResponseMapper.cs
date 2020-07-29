@@ -7,7 +7,7 @@ namespace YamhillaNET.Exceptions
     {
         public static IActionResult MapException(this Controller controller, Exception exception)
         {
-            if (exception.GetType() == typeof(YamhilliaStatusException))
+            if (exception.GetType() == typeof(YamhilliaStatusException) || exception.GetType().IsSubclassOf(typeof(YamhilliaStatusException)))
             {
                 YamhilliaStatusException statusException = (YamhilliaStatusException) exception;
                 var messageObject = new {message = statusException.Message};
