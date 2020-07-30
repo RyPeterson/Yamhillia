@@ -1,0 +1,73 @@
+{
+  "info": {
+    "_postman_id": "d0c0b824-bbc2-4b91-8d25-711ba83301b4",
+    "name": "Yamhillia",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"Username\": \"rpete2@test.com\",\n    \"Password\": \"Password1@\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:5001/api/auth/register",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "auth", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetUser",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:5001/api/auth/user",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "auth", "user"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"Username\": \"rpete@test.com\",\n    \"Password\": \"secret\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:5001/api/auth/login",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "auth", "login"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

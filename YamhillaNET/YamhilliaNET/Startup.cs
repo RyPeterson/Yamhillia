@@ -20,6 +20,7 @@ using YamhillaNET.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using YamhillaNET.Data.Runtime;
+using YamhillaNET.Exceptions;
 
 namespace YamhillaNET
 {
@@ -37,7 +38,7 @@ namespace YamhillaNET
         // This method gets called by the runtime. Use this method to add services to the container.
         public virtual void ConfigureServices(IServiceCollection services)
         {
-                services.AddControllers();
+                services.AddControllers(options => options.Filters.Add(new YamhilliaStatusExceptionFilter()));
                 AddConfiguration(services);
                 ConfigureDatabase(services);
                 AddServices(services);
