@@ -81,6 +81,7 @@ namespace YamhillaNET
         {
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IServerService, ServerService>();
         }
         
         protected virtual void ConfigureAuthentication(IServiceCollection services)
