@@ -2,19 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using YamhillaNET.Data;
-using YamhillaNET.Data.Runtime;
+using YamhillaNET.Data.Design;
 
 namespace YamhillaNET.Migrations.PostgresMigrations
 {
-    [DbContext(typeof(PostgresYamhilliaContext))]
-    [Migration("20200512011336_UserEntityUUID")]
-    partial class UserEntityUUID
+    [DbContext(typeof(DesignTimePostrgresContext))]
+    partial class DesignTimePostrgresContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,6 +50,9 @@ namespace YamhillaNET.Migrations.PostgresMigrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EntityUUID")
+                        .IsUnique();
 
                     b.HasIndex("Username")
                         .IsUnique();

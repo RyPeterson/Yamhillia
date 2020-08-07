@@ -75,6 +75,11 @@ namespace YamhilliaNETTests
             // lol
         }
 
+        protected override void ConfigureCORS(IServiceCollection services)
+        {
+            // All your base are belong to us
+        }
+
         protected YamhilliaContext GetDbContext()
         {
             if (!configured)

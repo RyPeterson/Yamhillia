@@ -143,7 +143,7 @@ namespace YamhillaNET
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        public virtual void ConfigureCORS(IServiceCollection services)
+        protected virtual void ConfigureCORS(IServiceCollection services)
         {            
             // Should be a semicolon separated list of strings
             var corsSettings = Configuration.GetSection("AllowedConsumers").Value;

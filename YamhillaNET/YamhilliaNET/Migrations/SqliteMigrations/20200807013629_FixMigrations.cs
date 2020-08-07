@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace YamhillaNET.Migrations.PostgresMigrations
+namespace YamhillaNET.Migrations.SqliteMigrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FixMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +12,10 @@ namespace YamhillaNET.Migrations.PostgresMigrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false),
+                    EntityUUID = table.Column<string>(nullable: false),
                     Username = table.Column<string>(nullable: false),
                     PasswordHash = table.Column<byte[]>(nullable: false),
                     PasswordSalt = table.Column<byte[]>(nullable: false)
@@ -24,6 +24,12 @@ namespace YamhillaNET.Migrations.PostgresMigrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_EntityUUID",
+                table: "Users",
+                column: "EntityUUID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Username",
