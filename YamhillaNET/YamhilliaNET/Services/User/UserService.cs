@@ -3,12 +3,12 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using YamhillaNET.Data;
-using YamhillaNET.Exceptions;
-using YamhillaNET.Models;
-using YamhillaNET.Util;
+using YamhilliaNET.Data;
+using YamhilliaNET.Exceptions;
+using YamhilliaNET.Models;
+using YamhilliaNET.Util;
 
-namespace YamhillaNET.Services.User
+namespace YamhilliaNET.Services.User
 {
     
     public class UserService: IUserService

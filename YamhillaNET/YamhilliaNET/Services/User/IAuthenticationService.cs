@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace YamhillaNET.Services.User
+namespace YamhilliaNET.Services.User
 {
     public interface IAuthenticationService
     {

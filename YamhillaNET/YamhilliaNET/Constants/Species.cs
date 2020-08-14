@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using YamhillaNET.Exceptions;
-using YamhillaNET.Util;
+using YamhilliaNET.Exceptions;
+using YamhilliaNET.Util;
 
-namespace YamhillaNET.Constants
+namespace YamhilliaNET.Constants
 {
     public class Species: StringEnumeration
     {

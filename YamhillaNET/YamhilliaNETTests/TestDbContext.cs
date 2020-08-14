@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using YamhillaNET.Data;
-using YamhillaNET.Data.Runtime;
+using YamhilliaNET.Data;
 
 namespace YamhilliaNETTests
 {
-    public class TestDbContext: SqliteYamhilliaContext
+    public class TestDbContext: YamhilliaContext
     {
         public TestDbContext() : base()
         {

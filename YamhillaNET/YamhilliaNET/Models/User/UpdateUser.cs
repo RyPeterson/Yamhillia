@@ -1,6 +1,6 @@
 using System;
 
-namespace YamhillaNET.Models
+namespace YamhilliaNET.Models
 {
     public class UpdateUser
     {

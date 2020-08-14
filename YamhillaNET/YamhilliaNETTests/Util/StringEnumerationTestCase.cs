@@ -1,5 +1,5 @@
 using Xunit;
-using YamhillaNET.Util;
+using YamhilliaNET.Util;
 
 namespace YamhilliaNETTests.Util
 {

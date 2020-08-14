@@ -1,7 +1,7 @@
 using System.Globalization;
 using Xunit;
-using YamhillaNET.Constants;
-using YamhillaNET.Exceptions;
+using YamhilliaNET.Constants;
+using YamhilliaNET.Exceptions;
 
 namespace YamhilliaNETTests.Constants
 {

@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using YamhillaNET.Services;
+using YamhilliaNET.Services;
 
-namespace YamhillaNET.Controllers
+namespace YamhilliaNET.Controllers
 {
     [ApiController]
     [Route("api/server")]

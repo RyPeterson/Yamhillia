@@ -9,12 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Xunit;
-using YamhillaNET;
-using YamhillaNET.Data;
-using YamhillaNET.Models;
-using YamhillaNET.Models.Entities;
-using YamhillaNET.Services;
-using YamhillaNET.Services.User;
+using YamhilliaNET;
+using YamhilliaNET.Data;
+using YamhilliaNET.Models;
+using YamhilliaNET.Models.Entities;
+using YamhilliaNET.Services;
+using YamhilliaNET.Services.User;
 
 namespace YamhilliaNETTests
 {

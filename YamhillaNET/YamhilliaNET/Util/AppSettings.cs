@@ -1,6 +1,6 @@
-using YamhillaNET.Constants;
+using YamhilliaNET.Constants;
 
-namespace YamhillaNET.Util
+namespace YamhilliaNET.Util
 {
     public class AppSettings
     {

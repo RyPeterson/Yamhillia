@@ -1,7 +1,7 @@
-using YamhillaNET.Models;
-using YamhillaNET.Models.Entities;
+using YamhilliaNET.Models;
+using YamhilliaNET.Models.Entities;
 
-namespace YamhillaNET.ViewModels
+namespace YamhilliaNET.ViewModels
 {
     public class UserViewModel
     {

@@ -1,4 +1,4 @@
-namespace YamhillaNET.Models
+namespace YamhilliaNET.Models
 {
     public class CreateUser
     {

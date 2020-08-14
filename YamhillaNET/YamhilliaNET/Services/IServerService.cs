@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace YamhillaNET.Services
+namespace YamhilliaNET.Services
 {
     public interface IServerService
     {

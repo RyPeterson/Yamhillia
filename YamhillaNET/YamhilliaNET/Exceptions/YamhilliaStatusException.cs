@@ -1,7 +1,7 @@
 #nullable enable
 using System;
 
-namespace YamhillaNET.Exceptions
+namespace YamhilliaNET.Exceptions
 {
     public class YamhilliaStatusException: YamhilliaException
     {

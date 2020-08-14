@@ -1,8 +1,9 @@
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using YamhilliaNET.Exceptions;
 
-namespace YamhillaNET.Exceptions
+namespace YamhilliaNET.Exceptions
 {
     public class YamhilliaStatusExceptionFilter : IActionFilter, IOrderedFilter
     {

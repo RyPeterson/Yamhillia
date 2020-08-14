@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using YamhillaNET.Models.Entities;
+using YamhilliaNET.Models.Entities;
 
-namespace YamhillaNET.Data
+namespace YamhilliaNET.Data
 {
     public class YamhilliaContext : DbContext
     {

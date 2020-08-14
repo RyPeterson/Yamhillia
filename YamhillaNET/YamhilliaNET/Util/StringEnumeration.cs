@@ -1,4 +1,4 @@
-namespace YamhillaNET.Util
+namespace YamhilliaNET.Util
 {
     public class StringEnumeration
     {

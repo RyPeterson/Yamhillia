@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "YamhillaNET": {
+    "YamhilliaNET": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/server/ping",

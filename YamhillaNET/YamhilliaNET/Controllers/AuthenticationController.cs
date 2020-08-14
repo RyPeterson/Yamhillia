@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using YamhillaNET.Models;
-using YamhillaNET.Services.User;
-using YamhillaNET.ViewModels;
+using YamhilliaNET.Models;
+using YamhilliaNET.Services.User;
+using YamhilliaNET.ViewModels;
 
-namespace YamhillaNET.Controllers
+namespace YamhilliaNET.Controllers
 {
     [Authorize]
     [ApiController]

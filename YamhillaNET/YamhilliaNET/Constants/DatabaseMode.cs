@@ -1,7 +1,7 @@
 using System;
-using YamhillaNET.Util;
+using YamhilliaNET.Util;
 
-namespace YamhillaNET.Constants
+namespace YamhilliaNET.Constants
 {
     public class DatabaseMode: StringEnumeration
     {

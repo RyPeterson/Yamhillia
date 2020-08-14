@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace YamhillaNET.Util
+namespace YamhilliaNET.Util
 {
     public class PasswordUtil
     {

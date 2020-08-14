@@ -1,6 +1,6 @@
 using System;
 
-namespace YamhillaNET.Exceptions
+namespace YamhilliaNET.Exceptions
 {
     public class YamhilliaException: Exception
     {

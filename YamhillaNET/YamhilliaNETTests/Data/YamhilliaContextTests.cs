@@ -1,9 +1,9 @@
 using System;
 using System.Security.Policy;
 using Xunit;
-using YamhillaNET.Models;
-using YamhillaNET.Models.Entities;
-using YamhillaNET.Util;
+using YamhilliaNET.Models;
+using YamhilliaNET.Models.Entities;
+using YamhilliaNET.Util;
 
 namespace YamhilliaNETTests.Data
 {

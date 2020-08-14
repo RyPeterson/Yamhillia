@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YamhillaNET.Models.Entities
+namespace YamhilliaNET.Models.Entities
 {
     public interface IYamhilliaModel
     {

@@ -1,10 +1,10 @@
 using System;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Xunit;
-using YamhillaNET.Exceptions;
-using YamhillaNET.Models;
-using YamhillaNET.Services;
-using YamhillaNET.Services.User;
+using YamhilliaNET.Exceptions;
+using YamhilliaNET.Models;
+using YamhilliaNET.Services;
+using YamhilliaNET.Services.User;
 
 namespace YamhilliaNETTests.Services.User
 {

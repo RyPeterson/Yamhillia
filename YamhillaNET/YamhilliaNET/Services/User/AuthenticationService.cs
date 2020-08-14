@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using YamhillaNET.Exceptions;
-using YamhillaNET.Util;
+using YamhilliaNET.Exceptions;
+using YamhilliaNET.Util;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace YamhillaNET.Services.User
+namespace YamhilliaNET.Services.User
 {
     public class AuthenticationService : IAuthenticationService
     {

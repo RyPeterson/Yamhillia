@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using YamhillaNET.Models;
+using YamhilliaNET.Models;
 
-namespace YamhillaNET.Services.User
+namespace YamhilliaNET.Services.User
 {
     public interface IUserService
     {

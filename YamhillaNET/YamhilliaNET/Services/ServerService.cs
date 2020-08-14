@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using YamhillaNET.Data;
+using YamhilliaNET.Data;
 
-namespace YamhillaNET.Services
+namespace YamhilliaNET.Services
 {
     public class ServerService: IServerService
     {

@@ -12,17 +12,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using YamhillaNET.Constants;
-using YamhillaNET.Data;
-using YamhillaNET.Services;
-using YamhillaNET.Services.User;
-using YamhillaNET.Util;
+using YamhilliaNET.Constants;
+using YamhilliaNET.Data;
+using YamhilliaNET.Services;
+using YamhilliaNET.Services.User;
+using YamhilliaNET.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using YamhillaNET.Data.Runtime;
-using YamhillaNET.Exceptions;
+using YamhilliaNET.Exceptions;
 
-namespace YamhillaNET
+namespace YamhilliaNET
 {
     public class Startup
     {
@@ -61,18 +60,13 @@ namespace YamhillaNET
             Console.WriteLine($@"Starting up database connection with {databaseMode.Value}");
             if (databaseMode == DatabaseMode.POSTGRES)
             {
-                // The jank is real. I want to have a generic YamhilliaContext during runtime,
-                // but have a subtype during migrations/db updates
+
                 services.AddDbContext<YamhilliaContext>(options =>
                         options.UseNpgsql(Configuration.GetConnectionString("PGConnection")));
-                services.AddDbContext<PostgresYamhilliaContext>(options =>
-                    options.UseNpgsql(Configuration.GetConnectionString("PGConnection")));
             }
             else
             {
                 services.AddDbContext<YamhilliaContext>(options =>
-                    options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
-                services.AddDbContext<SqliteYamhilliaContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
             }
         }
