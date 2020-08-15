@@ -1,0 +1,16 @@
+{
+  "name": "yamhillianet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "plopfile.js",
+  "scripts": {
+    "test": "cd ../YamhilliaNETTests && dotnet test",
+    "migrate": "./migrate.sh",
+    "rollback": "./unmigrate.sh"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "plop": "^2.7.4"
+  }
+}
