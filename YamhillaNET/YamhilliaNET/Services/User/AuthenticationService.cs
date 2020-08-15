@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using YamhilliaNET.Exceptions;
@@ -39,6 +40,24 @@ namespace YamhilliaNET.Services.User
             };
             var token = tokenHandler.CreateToken(descriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<ClaimsPrincipal> GenerateClaim(string username, string password)
+        {
+            var user = await _userService.Authenticate(username, password);
+            if (user == null)
+            {
+                throw new YamhilliaBadRequestError("Invalid credentials");
+            }
+
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Username)
+            };
+            
+            var identity = new ClaimsIdentity(claims, "User Identity");
+            return new ClaimsPrincipal(new [] { identity });
         }
     }
 }

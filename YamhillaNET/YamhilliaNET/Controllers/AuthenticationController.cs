@@ -1,9 +1,13 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YamhilliaNET.Models;
 using YamhilliaNET.Services.User;
 using YamhilliaNET.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using IAuthenticationService = YamhilliaNET.Services.User.IAuthenticationService;
 
 namespace YamhilliaNET.Controllers
 {
@@ -33,16 +37,18 @@ namespace YamhilliaNET.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AuthenticateUser authenticateUser)
         {
-            var token = await _authenticationService.GenerateToken(authenticateUser.Username, authenticateUser.Password);
-            return Ok(new
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var claim = await _authenticationService.GenerateClaim(authenticateUser.Username, authenticateUser.Password);
+            await HttpContext.SignInAsync(claim, new AuthenticationProperties()
             {
-                Token = token,
-                Username = authenticateUser.Username
+                ExpiresUtc = DateTimeOffset.Now.AddDays(3),
             });
+            return Ok();
         }
 
         [HttpGet("user")]
-        public async Task<IActionResult> User()
+        public async Task<IActionResult> GetUser()
         {
             var user = await _userService.GetUserById(long.Parse(HttpContext.User.Identity.Name ?? "-404"));
             if (user == null)
@@ -53,6 +59,14 @@ namespace YamhilliaNET.Controllers
             {
                 user = new UserViewModel(user)
             });
+        }
+
+        [HttpPost("logout")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok();
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "d0c0b824-bbc2-4b91-8d25-711ba83301b4",
+    "_postman_id": "f268f2a5-3a41-4d42-8c36-a402ee042c80",
     "name": "Yamhillia",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -32,6 +32,9 @@
     {
       "name": "GetUser",
       "request": {
+        "auth": {
+          "type": "noauth"
+        },
         "method": "GET",
         "header": [],
         "url": {
@@ -51,7 +54,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"Username\": \"rpete@test.com\",\n    \"Password\": \"secret\"\n}",
+          "raw": "{\n    \"Username\": \"rpete@test.com\",\n    \"Password\": \"Password1@\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -64,6 +67,21 @@
           "host": ["localhost"],
           "port": "5001",
           "path": ["api", "auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:5001/api/auth/logout",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "auth", "logout"]
         }
       },
       "response": []
