@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "f268f2a5-3a41-4d42-8c36-a402ee042c80",
+    "_postman_id": "02cece55-0229-498f-ac92-acc4c1d79a4a",
     "name": "Yamhillia",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -32,9 +32,6 @@
     {
       "name": "GetUser",
       "request": {
-        "auth": {
-          "type": "noauth"
-        },
         "method": "GET",
         "header": [],
         "url": {
@@ -54,7 +51,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"Username\": \"rpete@test.com\",\n    \"Password\": \"Password1@\"\n}",
+          "raw": "{\n    \"Username\": \"rpete2@test.com\",\n    \"Password\": \"Password1@\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -72,16 +69,40 @@
       "response": []
     },
     {
-      "name": "Logout",
+      "name": "Get Farm for Owner",
       "request": {
-        "method": "POST",
+        "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://localhost:5001/api/auth/logout",
+          "raw": "https://localhost:5001/api/farm/for-owner",
           "protocol": "https",
           "host": ["localhost"],
           "port": "5001",
-          "path": ["api", "auth", "logout"]
+          "path": ["api", "farm", "for-owner"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Farm",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"Name\": \"Ryan Farm\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:5001/api/farm/create",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "farm", "create"]
         }
       },
       "response": []

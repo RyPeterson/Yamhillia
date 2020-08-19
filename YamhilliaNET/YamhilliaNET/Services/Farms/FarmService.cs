@@ -48,7 +48,10 @@ namespace YamhilliaNET.Services.Farms
 
         public Task<Farm> GetFarmByOwner(long ownerId)
         {
-            return _db.Farms.Where(f => f.OwnerId == ownerId).FirstOrDefaultAsync();
+            return _db.Farms
+                .Where(f => f.OwnerId == ownerId)
+                .Include(f => f.Owner)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Farm> GetFarmById(long farmId)

@@ -14,7 +14,7 @@ namespace YamhilliaNET.Controllers
     [Authorize]
     [ApiController]
     [Route("api/auth")]
-    public class AuthenticationController : Controller
+    public class AuthenticationController : YamhilliaController
     {
         private readonly IUserService _userService;
         private readonly IAuthenticationService _authenticationService;
@@ -50,7 +50,7 @@ namespace YamhilliaNET.Controllers
         [HttpGet("user")]
         public async Task<IActionResult> GetUser()
         {
-            var user = await _userService.GetUserById(long.Parse(HttpContext.User.Identity.Name ?? "-404"));
+            var user = await _userService.GetUserById(GetLoggedInUserId());
             if (user == null)
             {
                 return NotFound("User not found");
