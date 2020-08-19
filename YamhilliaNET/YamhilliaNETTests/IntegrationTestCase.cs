@@ -13,8 +13,10 @@ using YamhilliaNET;
 using YamhilliaNET.Data;
 using YamhilliaNET.Models;
 using YamhilliaNET.Models.Entities;
+using YamhilliaNET.Models.Farms;
 using YamhilliaNET.Services;
-using YamhilliaNET.Services.User;
+using YamhilliaNET.Services.Farms;
+using YamhilliaNET.Services.Users;
 
 namespace YamhilliaNETTests
 {
@@ -115,6 +117,11 @@ namespace YamhilliaNETTests
                 Username = $@"test_user_{Guid.NewGuid().ToString()}@test.com",
                 Password = UNIVERSAL_USER_PASSWORD,
             });
+        }
+
+        protected async Task<Farm> CreateTestFarm(User user)
+        {
+            return await GetService<IFarmService>().CreateFarm(user.Id, new CreateFarmParams() {Name = "Test"});
         }
             
     }

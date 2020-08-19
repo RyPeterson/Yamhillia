@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
 using YamhilliaNET.Models;
+using YamhilliaNET.Models.Entities;
 
-namespace YamhilliaNET.Services.User
+namespace YamhilliaNET.Services.Users
 {
     public interface IUserService
     {
@@ -41,5 +42,6 @@ namespace YamhilliaNET.Services.User
         /// <param name="id"></param>
         /// <returns>The user if they exist or null if not</returns>
         Task<Models.Entities.User> GetUserById(long id);
+        
     }
 }

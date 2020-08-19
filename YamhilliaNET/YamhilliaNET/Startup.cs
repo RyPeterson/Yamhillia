@@ -16,12 +16,14 @@ using Microsoft.Extensions.Logging;
 using YamhilliaNET.Constants;
 using YamhilliaNET.Data;
 using YamhilliaNET.Services;
-using YamhilliaNET.Services.User;
+using YamhilliaNET.Services.Users;
 using YamhilliaNET.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using YamhilliaNET.Exceptions;
+using YamhilliaNET.Models.Entities;
+using YamhilliaNET.Services.Farms;
 
 namespace YamhilliaNET
 {
@@ -78,6 +80,7 @@ namespace YamhilliaNET
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IServerService, ServerService>();
+            services.AddTransient<IFarmService, FarmService>();
         }
         
         protected virtual void ConfigureAuthentication(IServiceCollection services)

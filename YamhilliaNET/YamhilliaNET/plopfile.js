@@ -26,5 +26,19 @@ module.exports = (plop) => {
                 };
             }
         }]
+    });
+    
+    plop.setGenerator('model', {
+        description: 'Create a new model',
+        prompts: [{
+            type: 'input',
+            name: 'name',
+            message: 'Model name?'
+        }],
+        actions: [{
+            type: 'add',
+            path: 'Models/Entities/{{name}}.cs',
+            templateFile: 'plop-templates/model.hbs'
+        }]
     })
 }

@@ -1,7 +1,7 @@
 using System.Threading;
 using Microsoft.Extensions.Options;
 using Xunit;
-using YamhilliaNET.Services.User;
+using YamhilliaNET.Services.Users;
 using YamhilliaNET.Util;
 
 namespace YamhilliaNETTests.Services.User

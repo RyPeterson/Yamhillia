@@ -4,7 +4,7 @@ using Xunit;
 using YamhilliaNET.Exceptions;
 using YamhilliaNET.Models;
 using YamhilliaNET.Services;
-using YamhilliaNET.Services.User;
+using YamhilliaNET.Services.Users;
 
 namespace YamhilliaNETTests.Services.User
 {

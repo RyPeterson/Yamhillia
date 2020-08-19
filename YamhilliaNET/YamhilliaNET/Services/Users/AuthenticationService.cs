@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace YamhilliaNET.Services.User
+namespace YamhilliaNET.Services.Users
 {
     public class AuthenticationService : IAuthenticationService
     {

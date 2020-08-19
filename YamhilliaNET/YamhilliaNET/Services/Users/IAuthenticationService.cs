@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace YamhilliaNET.Services.User
+namespace YamhilliaNET.Services.Users
 {
     public interface IAuthenticationService
     {

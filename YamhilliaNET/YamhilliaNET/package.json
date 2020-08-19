@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cd ../YamhilliaNETTests && dotnet test",
     "migrate": "./migrate.sh",
-    "rollback": "./unmigrate.sh"
+    "rollback": "./unmigrate.sh",
+    "plop": "plop"
   },
   "author": "",
   "license": "MIT",

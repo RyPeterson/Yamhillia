@@ -8,7 +8,7 @@ using YamhilliaNET.Exceptions;
 using YamhilliaNET.Models;
 using YamhilliaNET.Util;
 
-namespace YamhilliaNET.Services.User
+namespace YamhilliaNET.Services.Users
 {
     
     public class UserService: IUserService
@@ -147,9 +147,9 @@ namespace YamhilliaNET.Services.User
             return _context.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
         }
 
-        public async Task<Models.Entities.User> GetUserById(long id)
+        public async Task<Models.Entities.User> GetUserById(long Id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users.FindAsync(Id);
         }
 
         private bool IsValidEmail(string username)
