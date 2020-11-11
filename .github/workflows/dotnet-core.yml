@@ -18,14 +18,14 @@ jobs:
       with:
         dotnet-version: 5.0.100
     - name: Change Directories To Server
-      run: cd YamhilliaNET/YamhilliaNET && ls -a
+      run: cd YamhilliaNET
     - name: Install dependencies
       run: dotnet restore YamhilliaNET
     - name: Build
       run: dotnet build YamhilliaNET --configuration Release --no-restore
-    - name: Change Directories For Test
-      run: cd ~/Yamhillia/YamhilliaNET/YamhilliaNETTests
     - name: Install Test dependencies
       run: dotnet restore YamhilliaNETTests
+    - name: Build Tests
+      run: dotnet build YamhilliaNETTests --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
