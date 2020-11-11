@@ -20,12 +20,12 @@ jobs:
     - name: Change Directories To Server
       run: cd YamhilliaNET/YamhilliaNET && ls -a
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore YamhilliaNET
     - name: Build
       run: dotnet build YamhilliaNET --configuration Release --no-restore
     - name: Change Directories For Test
       run: cd ../YamhilliaNETTests
     - name: Install Test dependencies
-      run: dotnet restore
+      run: dotnet restore YamhilliaNETTests
     - name: Test
       run: dotnet test --no-restore --verbosity normal
