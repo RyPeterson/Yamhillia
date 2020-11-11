@@ -52,7 +52,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/storybook-react-router": "^1.0.1",
     "@types/styled-components": "^5.1.1",
-    "husky": "^4.2.5",
+    "husky": "^4.3.0",
     "plop": "^2.7.2",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
@@ -60,7 +60,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged --ignore-path=../.github/*"
     }
   }
 }
