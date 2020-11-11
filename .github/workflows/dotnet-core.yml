@@ -17,8 +17,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100
-    - name: Install dependencies
+    - name: Change Directories
       run: cd YamhilliaNET
+    - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
