@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build YamhilliaNET --configuration Release --no-restore
     - name: Change Directories For Test
-      run: cd ../YamhilliaNETTests
+      run: cd ~/YamhilliaNET/YamhilliaNETTests
     - name: Install Test dependencies
       run: dotnet restore YamhilliaNETTests
     - name: Test
