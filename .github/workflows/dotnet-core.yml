@@ -17,11 +17,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100
-    - name: Change Directories
-      run: cd YamhilliaNET
+    - name: Change Directories To Server
+      run: cd YamhilliaNET/YamhilliaNET && ls -a
     - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Change Directories For Test
+      run: cd ../YamhilliaNETTests
+    - name: Install Test dependencies
+      run: dotnet restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
