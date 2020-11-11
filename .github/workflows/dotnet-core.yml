@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build YamhilliaNET --configuration Release --no-restore
     - name: Change Directories For Test
       run: cd ../YamhilliaNETTests
     - name: Install Test dependencies
