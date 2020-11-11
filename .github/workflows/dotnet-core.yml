@@ -24,8 +24,8 @@ jobs:
     - name: Build
       run: dotnet build YamhilliaNET --configuration Release --no-restore
     - name: Install Test dependencies
-      run: dotnet restore YamhilliaNETTests/YamhilliaNETTests
+      run: ls -a && dotnet restore YamhilliaNETTests
     - name: Build Tests
-      run: dotnet build YamhilliaNETTests/YamhilliaNETTests --configuration Release --no-restore
+      run: dotnet build YamhilliaNETTests --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
