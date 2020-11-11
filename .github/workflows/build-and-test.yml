@@ -17,7 +17,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100
-    - name: Install dependencies
+    - name: Setup Node JS
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.18.3
+    - name: Install .NET dependencies
       run: dotnet restore YamhilliaNET/YamhilliaNET
     - name: Build
       run: dotnet build YamhilliaNET/YamhilliaNET --configuration Release --no-restore
@@ -27,3 +31,9 @@ jobs:
       run: dotnet build YamhilliaNET/YamhilliaNETTests --configuration Release --no-restore
     - name: Test
       run: dotnet test YamhilliaNET/YamhilliaNETTests --no-restore --verbosity normal
+    - name: Install NPM Dependencies
+      run: cd yamhillia-client && npm ci
+    - name: Build Client
+      run: cd yamhillia-client && npm run build
+    - name: test Client
+      run: cd yamhillia-client && npm run test
