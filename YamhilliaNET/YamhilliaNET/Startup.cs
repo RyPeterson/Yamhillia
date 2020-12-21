@@ -1,36 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using YamhilliaNET.Constants;
 using YamhilliaNET.Data;
+using YamhilliaNET.Exceptions;
 using YamhilliaNET.Services;
+using YamhilliaNET.Services.Farms;
 using YamhilliaNET.Services.Users;
 using YamhilliaNET.Util;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-using YamhilliaNET.Exceptions;
-using YamhilliaNET.Models.Entities;
-using YamhilliaNET.Services.Farms;
 
 namespace YamhilliaNET
 {
     public class Startup
     {
-        private readonly string YamhilliaCorsOptions = "_yamhilliaCorsOptions";
-        
+        private const string YamhilliaCorsOptions = "_yamhilliaCorsOptions";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -46,7 +36,7 @@ namespace YamhilliaNET
                 ConfigureDatabase(services);
                 AddServices(services);
                 ConfigureAuthentication(services);
-                ConfigureCORS(services);
+                ConfigureCors(services);
         }
         
 
@@ -116,14 +106,14 @@ namespace YamhilliaNET
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        protected virtual void ConfigureCORS(IServiceCollection services)
+        protected virtual void ConfigureCors(IServiceCollection services)
         {            
             // Should be a semicolon separated list of strings
             var corsSettings = Configuration.GetSection("AllowedConsumers").Value;
             var consumers = corsSettings.Split(";");
             services.AddCors(options =>
             {
-                options.AddPolicy(name: YamhilliaCorsOptions, builder =>
+                options.AddPolicy(YamhilliaCorsOptions, builder =>
                 {
                     builder.WithOrigins(consumers)
                         .AllowAnyHeader()

@@ -1,12 +1,13 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YamhilliaNET.Models;
+using YamhilliaNET.Models.User;
 using YamhilliaNET.Services.Users;
 using YamhilliaNET.ViewModels;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using IAuthenticationService = YamhilliaNET.Services.Users.IAuthenticationService;
 
 namespace YamhilliaNET.Controllers

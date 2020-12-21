@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace YamhilliaNET.Util
 {
-    public class PasswordUtil
+    public static class PasswordUtil
     {
         /// <summary>
         /// Requires:
@@ -22,26 +18,24 @@ namespace YamhilliaNET.Util
         /// </summary>
         private static readonly HashSet<char> SpecialCharacters = new HashSet<char>() { '%', '$', '#', '*', '@' };
 
-        private static readonly int MinLength = 8;
-        private static readonly int MinConditionsMet = 5;
-        
+        private const int MinLength = 8;
+        private const int MinConditionsMet = 5;
+
         public static void Hash(string password, out byte[] hash, out byte[] salt)
         {
             if (password == null)
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new ArgumentException("Password cannot be empty or blank.", "password");
+                throw new ArgumentException("Password cannot be empty or blank.", nameof(password));
             }
 
-            using (var hmac = new HMACSHA512())
-            {
-                salt = hmac.Key;
-                hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            }
+            using var hmac = new HMACSHA512();
+            salt = hmac.Key;
+            hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         }
 
         public static bool Verify(string password, byte[] hash, byte[] salt)
@@ -53,23 +47,21 @@ namespace YamhilliaNET.Util
 
             if (hash.Length !=  64)
             {
-                throw new ArgumentException("Invalid hash. Must be 64 bytes", "hash");
+                throw new ArgumentException("Invalid hash. Must be 64 bytes", nameof(hash));
             }
 
             if (salt.Length != 128)
             {
-                throw new ArgumentException("Invalid salt. Must be 128 bytes", "salt");
+                throw new ArgumentException("Invalid salt. Must be 128 bytes", nameof(salt));
             }
 
-            using (var hmac = new HMACSHA512(salt))
+            using var hmac = new HMACSHA512(salt);
+            var computed = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            for (int i = 0; i < computed.Length; i++)
             {
-                var computed = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computed.Length; i++)
+                if (computed[i] != hash[i])
                 {
-                    if (computed[i] != hash[i])
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 

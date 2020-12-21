@@ -1,5 +1,3 @@
-using YamhilliaNET.Constants;
-
 namespace YamhilliaNET.Util
 {
     public class AppSettings

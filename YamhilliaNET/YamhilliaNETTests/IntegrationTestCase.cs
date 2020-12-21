@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
@@ -14,7 +13,7 @@ using YamhilliaNET.Data;
 using YamhilliaNET.Models;
 using YamhilliaNET.Models.Entities;
 using YamhilliaNET.Models.Farms;
-using YamhilliaNET.Services;
+using YamhilliaNET.Models.User;
 using YamhilliaNET.Services.Farms;
 using YamhilliaNET.Services.Users;
 
@@ -77,7 +76,7 @@ namespace YamhilliaNETTests
             // lol
         }
 
-        protected override void ConfigureCORS(IServiceCollection services)
+        protected override void ConfigureCors(IServiceCollection services)
         {
             // All your base are belong to us
         }

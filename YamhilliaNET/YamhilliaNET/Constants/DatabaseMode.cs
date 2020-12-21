@@ -9,19 +9,19 @@ namespace YamhilliaNET.Constants
         {
         }
         
-        public static DatabaseMode POSTGRES = new DatabaseMode("POSTGRES");
-        public static DatabaseMode SQLITE = new DatabaseMode("SQLITE");
+        public static readonly DatabaseMode POSTGRES = new DatabaseMode("POSTGRES");
+        public static readonly DatabaseMode SQLITE = new DatabaseMode("SQLITE");
 
         public static DatabaseMode FromString(string value)
         {
-            if (DatabaseMode.POSTGRES.Value ==  value)
+            if (POSTGRES.Value ==  value)
             {
-                return DatabaseMode.POSTGRES;
+                return POSTGRES;
             }
 
-            if (DatabaseMode.SQLITE.Value == value)
+            if (SQLITE.Value == value)
             {
-                return DatabaseMode.SQLITE;
+                return SQLITE;
             }
             throw new ArgumentException("value is not a valid DatabaseMode", value);
         }

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using YamhilliaNET.Data;
 using YamhilliaNET.Exceptions;
-using YamhilliaNET.Models;
 using YamhilliaNET.Models.Entities;
 using YamhilliaNET.Models.Farms;
 using YamhilliaNET.Services.Users;
@@ -41,7 +40,7 @@ namespace YamhilliaNET.Services.Farms
             }
             
             var owner = ObjectPreconditions.ExistsOrNotFound(await _userService.GetUserById(ownerId));
-            var entity = await _db.Farms.AddAsync(new Farm() {Name = createFarmParams.Name, OwnerId = owner.Id});
+            var entity = await _db.Farms.AddAsync(new Farm {Name = createFarmParams.Name, OwnerId = owner.Id});
             await _db.SaveChangesAsync();
             return entity.Entity;
         }

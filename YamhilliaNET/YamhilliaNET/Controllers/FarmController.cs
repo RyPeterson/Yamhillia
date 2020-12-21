@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YamhilliaNET.Models.Farms;
 using YamhilliaNET.Services.Farms;
-using YamhilliaNET.Services.Users;
 
 namespace YamhilliaNET.Controllers
 {

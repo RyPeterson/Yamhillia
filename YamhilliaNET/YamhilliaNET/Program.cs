@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using YamhilliaNET.Constants;
-using YamhilliaNET.ViewModels;
 
 namespace YamhilliaNET
 {
@@ -21,16 +12,14 @@ namespace YamhilliaNET
             // Its power is over 9000!
             if (args.Length > 0)
             {
-                if (args[0] == "Migrate")
+                switch (args[0])
                 {
-                    new MigrationRunner(args).UpdateDatabase();
-                    return;
-                }
-
-                if (args[0] == "Rollback")
-                {
-                    new MigrationRunner(args).Rollback();
-                    return;
+                    case "Migrate":
+                        new MigrationRunner(args).UpdateDatabase();
+                        return;
+                    case "Rollback":
+                        new MigrationRunner(args).Rollback();
+                        return;
                 }
             }
             CreateHostBuilder(args).Build().Run();

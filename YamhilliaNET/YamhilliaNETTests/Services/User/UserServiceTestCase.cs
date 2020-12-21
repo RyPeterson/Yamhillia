@@ -1,9 +1,8 @@
 using System;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Xunit;
 using YamhilliaNET.Exceptions;
 using YamhilliaNET.Models;
-using YamhilliaNET.Services;
+using YamhilliaNET.Models.User;
 using YamhilliaNET.Services.Users;
 
 namespace YamhilliaNETTests.Services.User

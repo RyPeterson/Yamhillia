@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using FluentMigrator.Runner;
-using FluentMigrator.Runner.Processors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using YamhilliaNET.Constants;
@@ -9,18 +8,11 @@ using YamhilliaNET.Util;
 
 namespace YamhilliaNET
 {
-    static class MigrationRunnerExtension
+    internal static class MigrationRunnerExtension
     {
         public static IMigrationRunnerBuilder ConfigureRunner(this IMigrationRunnerBuilder runner, DatabaseMode mode)
         {
-            if (mode ==  DatabaseMode.POSTGRES)
-            {
-                return runner.AddPostgres();
-            }
-            else
-            {
-                return runner.AddSQLite();
-            }
+            return mode ==  DatabaseMode.POSTGRES ? runner.AddPostgres() : runner.AddSQLite();
         }
     }
     public class MigrationRunner
@@ -79,10 +71,8 @@ namespace YamhilliaNET
 
         public void UpdateDatabase()
         {
-            using (var scope = CreateServiceProvider().CreateScope())
-            {
-                scope.ServiceProvider.GetRequiredService<IMigrationRunner>().MigrateUp();
-            }
+            using var scope = CreateServiceProvider().CreateScope();
+            scope.ServiceProvider.GetRequiredService<IMigrationRunner>().MigrateUp();
         }
 
         public void Rollback()

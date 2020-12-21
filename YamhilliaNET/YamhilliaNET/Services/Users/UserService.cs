@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using YamhilliaNET.Data;
 using YamhilliaNET.Exceptions;
 using YamhilliaNET.Models;
+using YamhilliaNET.Models.Entities;
+using YamhilliaNET.Models.User;
 using YamhilliaNET.Util;
 
 namespace YamhilliaNET.Services.Users
@@ -20,7 +22,7 @@ namespace YamhilliaNET.Services.Users
             _context = context;
         }
 
-        public async Task<Models.Entities.User> Authenticate(string username, string password)
+        public async Task<User> Authenticate(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username))
             {
@@ -38,15 +40,10 @@ namespace YamhilliaNET.Services.Users
                 return null;
             }
 
-            if (!PasswordUtil.Verify(password, userByUsername.PasswordHash, userByUsername.PasswordSalt))
-            {
-                return null;
-            }
-
-            return userByUsername;
+            return !PasswordUtil.Verify(password, userByUsername.PasswordHash, userByUsername.PasswordSalt) ? null : userByUsername;
         }
 
-        public async Task<Models.Entities.User> CreateUser(CreateUser createUser)
+        public async Task<User> CreateUser(CreateUser createUser)
         {
             if (createUser == null)
             {
@@ -78,9 +75,8 @@ namespace YamhilliaNET.Services.Users
                 throw new YamhilliaBadRequestError("Invalid username");
             }
 
-            byte[] passwordHash, passwordSalt;
-            PasswordUtil.Hash(createUser.Password, out passwordHash, out passwordSalt);
-            var untracked = _context.Users.Add(new Models.Entities.User()
+            PasswordUtil.Hash(createUser.Password, out var passwordHash, out var passwordSalt);
+            var untracked = _context.Users.Add(new User()
             {
                 Username = createUser.Username,
                 PasswordHash = passwordHash,
@@ -90,7 +86,7 @@ namespace YamhilliaNET.Services.Users
             return untracked.Entity;
         }
 
-        public async Task<Models.Entities.User> UpdateUser(UpdateUser updateUser)
+        public async Task<User> UpdateUser(UpdateUser updateUser)
         {
             if (updateUser == null)
             {
@@ -131,8 +127,7 @@ namespace YamhilliaNET.Services.Users
             userById.Username = updateUser.Username;
             if (updateUser.Password != null)
             {
-                byte[] passwordHash, passwordSalt;
-                PasswordUtil.Hash(updateUser.Password, out passwordHash, out passwordSalt);
+                PasswordUtil.Hash(updateUser.Password, out var passwordHash, out var passwordSalt);
                 userById.PasswordHash = passwordHash;
                 userById.PasswordSalt = passwordSalt;
             }
@@ -142,17 +137,17 @@ namespace YamhilliaNET.Services.Users
             return updated.Entity;
         }
 
-        public Task<Models.Entities.User> GetUserByUsername(string username)
+        public Task<User> GetUserByUsername(string username)
         {
             return _context.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
         }
 
-        public async Task<Models.Entities.User> GetUserById(long Id)
+        public async Task<User> GetUserById(long id)
         {
-            return await _context.Users.FindAsync(Id);
+            return await _context.Users.FindAsync(id);
         }
 
-        private bool IsValidEmail(string username)
+        private static bool IsValidEmail(string username)
         {
             if (string.IsNullOrWhiteSpace(username))
             {

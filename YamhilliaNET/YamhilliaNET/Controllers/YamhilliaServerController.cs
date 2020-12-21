@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using YamhilliaNET.Services;
 
@@ -10,7 +8,7 @@ namespace YamhilliaNET.Controllers
     public class YamhilliaServerController : Controller
     {
         
-        private IServerService _serverService;
+        private readonly IServerService _serverService;
 
         public YamhilliaServerController(IServerService serverService)
         {

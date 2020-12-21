@@ -1,6 +1,4 @@
 using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using YamhilliaNET.Data;
 
 namespace YamhilliaNET.Services

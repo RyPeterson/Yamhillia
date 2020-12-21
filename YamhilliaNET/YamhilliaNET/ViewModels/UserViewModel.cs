@@ -1,4 +1,3 @@
-using YamhilliaNET.Models;
 using YamhilliaNET.Models.Entities;
 
 namespace YamhilliaNET.ViewModels

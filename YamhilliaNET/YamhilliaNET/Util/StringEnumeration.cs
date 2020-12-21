@@ -2,21 +2,16 @@ namespace YamhilliaNET.Util
 {
     public class StringEnumeration
     {
-        private readonly string _value;
-        
-        public string Value
-        {
-            get { return _value; }
-        }
+        public string Value { get; }
 
         protected StringEnumeration(string value)
         {
-            _value = value;
+            Value = value;
         }
 
         protected bool Equals(StringEnumeration other)
         {
-            return this._value == other._value;
+            return this.Value == other.Value;
         }
 
         public override bool Equals(object obj)
@@ -29,7 +24,7 @@ namespace YamhilliaNET.Util
 
         public override int GetHashCode()
         {
-            return _value.GetHashCode();
+            return Value.GetHashCode();
         }
 
         public static bool operator ==(StringEnumeration a, StringEnumeration b)
