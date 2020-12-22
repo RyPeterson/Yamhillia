@@ -10,14 +10,12 @@ namespace YamhilliaNET.Migrations
         {
             Create.Table("Farms")
                 .WithCommonStructure()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("OwnerId").AsInt64().NotNullable();
-            Create.ForeignKey().FromTable("Farms").ForeignColumn("OwnerId").ToTable("Users").PrimaryColumn("Id");
+                .WithColumn("Name").AsString().NotNullable();
         }
     
         public override void Down()
         {
-        
+            Delete.Table("Farms");
         }
     }
 }

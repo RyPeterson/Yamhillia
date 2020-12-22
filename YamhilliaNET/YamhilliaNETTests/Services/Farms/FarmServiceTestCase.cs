@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using YamhilliaNET.Constants;
 using YamhilliaNET.Exceptions;
 using YamhilliaNET.Models.Farms;
 using YamhilliaNET.Services.Farms;
@@ -22,8 +23,10 @@ namespace YamhilliaNETTests.Services.Farms
             var owner = await CreateTestUser();
             var farm = await _farmService.CreateFarm(owner.Id, new CreateFarmParams() { Name = "Test"});
             Assert.NotNull(farm);
-            var fromDb = await GetDbContext().Farms.Where(f => f.OwnerId == owner.Id).FirstAsync();
-            Assert.Equal(fromDb.OwnerId, owner.Id);
+            var ownership = await GetDbContext().FarmMemberships.Where(m => m.FarmId == farm.Id).ToListAsync();
+            Assert.NotEmpty(ownership);
+            Assert.Equal(ownership[0].UserId, owner.Id);
+            Assert.Equal(MemberType.OWNER, ownership[0].MemberType);
         }
 
         [Fact]

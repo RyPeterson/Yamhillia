@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using YamhilliaNET.Constants;
 using YamhilliaNET.Data;
 using YamhilliaNET.Exceptions;
 using YamhilliaNET.Models.Entities;
@@ -40,17 +41,28 @@ namespace YamhilliaNET.Services.Farms
             }
             
             var owner = ObjectPreconditions.ExistsOrNotFound(await _userService.GetUserById(ownerId));
-            var entity = await _db.Farms.AddAsync(new Farm {Name = createFarmParams.Name, OwnerId = owner.Id});
+            var entity = _db.Farms.Add(new Farm {Name = createFarmParams.Name, FarmMembers = new []
+            {
+                new FarmMembership
+                {
+                    UserId = ownerId, 
+                    MemberType = MemberType.OWNER
+                }
+            }});
             await _db.SaveChangesAsync();
             return entity.Entity;
         }
 
-        public Task<Farm> GetFarmByOwner(long ownerId)
+        public async Task<Farm> GetFarmByOwner(long ownerId)
         {
-            return _db.Farms
-                .Where(f => f.OwnerId == ownerId)
-                .Include(f => f.Owner)
+            /*
+             * select first(*) from farm_memberships where userId = ownerId and memberType = 'OWNER'
+             */
+            var existing = await _db.FarmMemberships
+                .Where(m => m.UserId == ownerId && m.MemberType == MemberType.OWNER)
+                .Include(m => m.Farm)
                 .FirstOrDefaultAsync();
+            return existing?.Farm;
         }
 
         public async Task<Farm> GetFarmById(long farmId)

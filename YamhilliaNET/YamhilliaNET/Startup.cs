@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +35,12 @@ namespace YamhilliaNET
         {
                 services
                     .AddControllers(options => options.Filters.Add(new YamhilliaStatusExceptionFilter()))
-                    .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+                    .AddJsonOptions(options =>
+                        {
+                            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                        }
+                    );
                 AddConfiguration(services);
                 ConfigureDatabase(services);
                 AddServices(services);

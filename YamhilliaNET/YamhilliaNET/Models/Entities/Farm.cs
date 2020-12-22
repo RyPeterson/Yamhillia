@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace YamhilliaNET.Models.Entities
@@ -7,8 +8,6 @@ namespace YamhilliaNET.Models.Entities
         [Required]
         public string Name { set; get; }
         
-        [Required]
-        public long OwnerId { set; get; }
-        public virtual User Owner { set; get; }
+        public virtual IEnumerable<FarmMembership> FarmMembers { get; set; }
     }
 }
