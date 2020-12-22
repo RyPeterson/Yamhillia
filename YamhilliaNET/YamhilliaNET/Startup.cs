@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,9 @@ namespace YamhilliaNET
         // This method gets called by the runtime. Use this method to add services to the container.
         public virtual void ConfigureServices(IServiceCollection services)
         {
-                services.AddControllers(options => options.Filters.Add(new YamhilliaStatusExceptionFilter()));
+                services
+                    .AddControllers(options => options.Filters.Add(new YamhilliaStatusExceptionFilter()))
+                    .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
                 AddConfiguration(services);
                 ConfigureDatabase(services);
                 AddServices(services);
