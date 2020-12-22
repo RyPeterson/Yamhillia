@@ -38,7 +38,7 @@ namespace YamhilliaNET.Migrations
     
         public override void Down()
         {
-        
+            Delete.Table("FarmMemberships");
         }
     }
 }
