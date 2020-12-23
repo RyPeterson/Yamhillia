@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using YamhilliaNET.Constants;
 using YamhilliaNET.Models.Entities;
 using YamhilliaNET.Models.Farms;
 
@@ -30,6 +33,26 @@ namespace YamhilliaNET.Services.Farms
         /// <param name="farmId">the id of the farm</param>
         /// <returns>The farm if it exists, or null if not</returns>
         Task<Farm> GetFarmById(long farmId);
-        
+
+
+        /// <summary>
+        /// Add a user to the farm with the given level.
+        /// If the user + level exists, then nothing happens
+        /// If the user exists at a different level and is not an OWNER, they will be changed to that level
+        /// If the user doesn't exist in the farm, the membership will be added.
+        /// OWNER can only add new owners or administrators
+        /// OWNER and ADMINISTRATORS can add WORKERS and GUESTs
+        /// </summary>
+        /// <param name="addToFarmParams">The request data</param>
+        /// <returns>The new list of farm memberships for the user</returns>
+        Task<List<FarmMembership>> AddUserToFarm(AddUserToFarmParams addToFarmParams);
+
+        /// <summary>
+        /// Return 0 or more farm memberships for the farm.
+        /// Empty if there are no memberships or if the farm is not found.
+        /// </summary>
+        /// <param name="farmId">the id of the farm to get the members of</param>
+        /// <returns>a collection of farm members (eagerly loaded)</returns>
+        Task<List<FarmMembership>> GetFarmMembers(long farmId);
     }
 }

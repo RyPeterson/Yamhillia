@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using YamhilliaNET.Constants;
 using YamhilliaNET.Data;
 using YamhilliaNET.Exceptions;
@@ -46,6 +47,7 @@ namespace YamhilliaNET
                 AddServices(services);
                 ConfigureAuthentication(services);
                 ConfigureCors(services);
+                services.AddLogging(config => config.AddConsole());
         }
         
 
