@@ -42,6 +42,23 @@ namespace YamhilliaNETTests.Services.Farms
         }
 
         [Fact]
+        public async void Test_CreateFarm_UnhappyPaths()
+        {
+            var owner = await CreateTestUser();
+            await Assert.ThrowsAsync<YamhilliaBadRequestError>(() => _farmService.CreateFarm(owner.Id, null));
+            await Assert.ThrowsAsync<YamhilliaBadRequestError>(() => _farmService.CreateFarm(owner.Id,
+                new CreateFarmParams
+                {
+                    Name = "",
+                }));
+            await Assert.ThrowsAsync<YamhilliaBadRequestError>(() => _farmService.CreateFarm(owner.Id,
+                new CreateFarmParams
+                {
+                    Name = null,
+                }));
+        }
+
+        [Fact]
         public async void Test_GetFarmByOwner()
         {
             var owner = await CreateTestUser();
@@ -382,6 +399,119 @@ namespace YamhilliaNETTests.Services.Farms
                     MemberType = MemberType.ADMINISTRATOR,
                     UserId = otherAdmin.Id
                 }));
+        }
+
+        [Fact]
+        public async void Test_AddUserToFarm_NotMemberOfFarm()
+        {
+            var owner = await CreateTestUser();
+            var farm = await CreateTestFarm(owner);
+            var nonMember = await CreateTestUser();
+            var toAdd = await CreateTestUser();
+
+            await Assert.ThrowsAsync<YamhilliaBadRequestError>(() => _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                MemberType = MemberType.GUEST,
+                RequesterId = nonMember.Id,
+                UserId = toAdd.Id
+            }));
+        }
+
+        [Fact]
+        public async void Test_AddUser_Existing_Same()
+        {
+            var owner = await CreateTestUser();
+            var farm = await CreateTestFarm(owner);
+            var user = await CreateTestUser();
+
+            await _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                RequesterId = owner.Id,
+                MemberType = MemberType.WORKER,
+                UserId = user.Id
+
+            });
+            
+            await _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                RequesterId = owner.Id,
+                MemberType = MemberType.WORKER,
+                UserId = user.Id
+
+            });
+
+            var users = await _farmService.GetFarmMembers(farm.Id);
+            Assert.Equal(2, users.Count);
+            var userMembership = users.FirstOrDefault(u => u.UserId == user.Id);
+            Assert.NotNull(userMembership);
+            Assert.Equal(MemberType.WORKER, userMembership.MemberType);
+        }
+        
+        [Fact]
+        public async void Test_AddUser_Existing_Upgrade()
+        {
+            var owner = await CreateTestUser();
+            var farm = await CreateTestFarm(owner);
+            var user = await CreateTestUser();
+
+            await _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                RequesterId = owner.Id,
+                MemberType = MemberType.WORKER,
+                UserId = user.Id
+
+            });
+            
+            await _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                RequesterId = owner.Id,
+                MemberType = MemberType.ADMINISTRATOR,
+                UserId = user.Id
+
+            });
+
+            var users = await _farmService.GetFarmMembers(farm.Id);
+            Assert.Equal(2, users.Count);
+            var userMembership = users.FirstOrDefault(u => u.UserId == user.Id);
+            Assert.NotNull(userMembership);
+            Assert.Equal(MemberType.ADMINISTRATOR, userMembership.MemberType);
+        }
+        
+        [Fact]
+        public async void Test_AddUser_Existing_Downgrade()
+        {
+            var owner = await CreateTestUser();
+            var farm = await CreateTestFarm(owner);
+            var user = await CreateTestUser();
+
+            await _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                RequesterId = owner.Id,
+                MemberType = MemberType.WORKER,
+                UserId = user.Id
+
+            });
+            
+            await _farmService.AddUserToFarm(new AddUserToFarmParams
+            {
+                FarmId = farm.Id,
+                RequesterId = owner.Id,
+                MemberType = MemberType.GUEST,
+                UserId = user.Id
+
+            });
+
+            var users = await _farmService.GetFarmMembers(farm.Id);
+            Assert.Equal(2, users.Count);
+            var userMembership = users.FirstOrDefault(u => u.UserId == user.Id);
+            Assert.NotNull(userMembership);
+            Assert.Equal(MemberType.GUEST, userMembership.MemberType);
         }
     }
 }

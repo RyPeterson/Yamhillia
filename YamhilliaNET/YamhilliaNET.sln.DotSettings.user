@@ -1,9 +1,12 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=42688e55_002D5251_002D46e5_002Dbdef_002D205d26bbbd7e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test_AddUserToFarm_OwnerOwner" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::6515E1F6-6BE9-44A0-87C2-0FA2D9ABC604::net5.0::YamhilliaNETTests.Services.Farms.FarmServiceTestCase&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/ryanpeterson/Library/Caches/JetBrains/Rider2020.3/resharper-host/temp/Rider/vAny/CoverageData/_YamhilliaNET.-1018677086/Snapshot/snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=314777e7_002D3cee_002D4e20_002Da13b_002Dc2b79a0bbaaf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;And&gt;
+    &lt;Project Location="/Users/ryanpeterson/projects/Yamhillia/YamhilliaNET/YamhilliaNETTests" Presentation="&amp;lt;YamhilliaNETTests&amp;gt;" /&gt;
+    &lt;Namespace&gt;YamhilliaNETTests&lt;/Namespace&gt;
+  &lt;/And&gt;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	

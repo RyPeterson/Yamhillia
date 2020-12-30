@@ -91,7 +91,7 @@ namespace YamhilliaNET.Services.Farms
                 throw new YamhilliaNotFoundError("Farm not found.");
             }
             var userMemberships = await GetUserMemberships(addToFarmParams.UserId);
-            var existingFarmMemberships = userMemberships.Where(m => m.UserId == addToFarmParams.UserId).ToList();
+            var existingFarmMemberships = userMemberships.Where(m => m.UserId == addToFarmParams.UserId && m.FarmId == addToFarmParams.FarmId).ToList();
 
             // This membership already exists
             if (
@@ -106,7 +106,7 @@ namespace YamhilliaNET.Services.Farms
             FarmMembership membership = null;
             bool edit = false;
             // If there is an existing membership in this farm, edit it
-            if (existingFarmMemberships.Count > 1)
+            if (existingFarmMemberships.Count > 0)
             {
                 membership = existingFarmMemberships[0];
                 _logger.LogInformation($"Editing existing membership {membership.Id}, {membership.MemberType} => {addToFarmParams.MemberType}");

@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using YamhilliaNET.Util;
 
@@ -49,6 +50,41 @@ namespace YamhilliaNETTests
             Assert.True(PasswordUtil.IsStrongEnough("12345*Mm"));
             
             Assert.True(PasswordUtil.IsStrongEnough("Password1@"));
+        }
+
+        [Fact]
+        public void Test_Hash_Fails_NullPassword()
+        {
+            byte[] hash;
+            byte[] salt;
+            Assert.Throws<ArgumentNullException>(() => PasswordUtil.Hash(null, out hash, out salt));
+        }
+
+        [Fact]
+        public void Test_Hash_EmptyPassword()
+        {
+            byte[] hash;
+            byte[] salt;
+            Assert.Throws<ArgumentException>(() => PasswordUtil.Hash("", out hash, out salt));
+
+        }
+
+        [Fact]
+        public void Test_Verify_EmptyPassword()
+        {
+            Assert.False(PasswordUtil.Verify("", new byte[]{}, new byte[]{}));
+            Assert.False(PasswordUtil.Verify(null, new byte[]{}, new byte[]{}));
+
+        }
+
+        [Fact]
+        public void Test_Verify_InvalidHashOrSalt()
+        {
+            // Verify we're actually testing correctly
+            PasswordUtil.Verify("nope", new byte[64], new byte[128]);
+            Assert.Throws<ArgumentException>(() => PasswordUtil.Verify("nope", new byte[63], new byte[128]));
+            Assert.Throws<ArgumentException>(() => PasswordUtil.Verify("nope", new byte[64], new byte[127]));
+
         }
     }
 }

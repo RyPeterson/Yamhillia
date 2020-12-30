@@ -7,7 +7,7 @@ namespace YamhilliaNET.Controllers
     {
         protected long GetLoggedInUserId()
         {
-            if (!long.TryParse(HttpContext.User.Identity.Name, out var userId))
+            if (HttpContext.User.Identity == null || !long.TryParse(HttpContext.User.Identity.Name, out var userId))
             {
                 throw new YamhilliaForbiddenError("Must be logged in to access this endpoint.");
             }

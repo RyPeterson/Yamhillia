@@ -22,8 +22,18 @@ namespace YamhilliaNETTests.Util
             Assert.False(TestEnumeration.BAR != TestEnumeration.BAR);
             Assert.False(TestEnumeration.FOO != TestEnumeration.FOO);
         }
-    }
 
+        [Fact]
+        public void TestEquals()
+        {
+            Assert.True(TestEnumeration.BAR.Equals(TestEnumeration.BAR));
+            Assert.True(TestEnumeration.FOO.Equals(TestEnumeration.FOO));
+            Assert.False(TestEnumeration.FOO.Equals(TestEnumeration.BAR));
+            Assert.False(TestEnumeration.BAR.Equals(TestEnumeration.FOO));
+            Assert.False(TestEnumeration.FOO.Equals(null));
+            Assert.False(TestEnumeration.BAR.Equals("nope"));
+        }
+    }
     public class TestEnumeration : StringEnumeration
     {
         private TestEnumeration(string value) : base(value)
