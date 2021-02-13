@@ -48,6 +48,7 @@ namespace YamhilliaNET.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("user")]
         public async Task<IActionResult> GetUser()
         {
