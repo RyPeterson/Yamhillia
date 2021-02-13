@@ -7,6 +7,7 @@ import { ThemeColor, ThemeContrastColor } from "../constants/colors";
 import User from "../types/user/User";
 import { login, register } from "../constants/routes/unauthenticatedRoutes";
 import { logout } from "../constants/routes/shared";
+import { profile } from "../constants/routes/authenticatedRoutes";
 
 export interface NavigationItem {
   label: string;
@@ -19,6 +20,7 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ user, navigationItems = [], ...rest }) => {
+    console.log(user);
   return (
     <Root {...rest}>
       <NavItems>
@@ -83,15 +85,16 @@ const AccountGroup = styled(Row)`
   align-items: center;
   flex: 1 0 auto;
   justify-content: flex-end;
-  a + a,
-  ${Welcome} + a {
+  button + button {
     margin-left: 1rem;
   }
 `;
 
 const LoggedInNavigations: FC<{ user: User }> = ({ user }) => (
   <AccountGroup>
-    <Link href="/profile">Welcome {user.email}</Link>
+    <Link href={profile}>
+      <NavItem>Welcome {user.username}</NavItem>
+    </Link>
     <Link href={logout}>
       <NavItem>Log Out</NavItem>
     </Link>

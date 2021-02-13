@@ -56,7 +56,8 @@ export default styled(LoginForm)``;
 const Root = styled(Form)`
   justify-content: space-between;
   flex: 1 0 auto;
-  max-height: 300px;
+  max-height: 400px;
+  width: 310px;
 
   ${FormErrors} {
     min-height: 80px;

@@ -128,7 +128,8 @@ namespace YamhilliaNET
                 {
                     builder.WithOrigins(consumers)
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
         }

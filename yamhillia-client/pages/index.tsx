@@ -1,20 +1,20 @@
 import styled from "styled-components";
 import Page from "../components/Page";
-import getUser from "../api/user/getUser";
 import authenticate from "../authenticate/authenticate";
-import { context } from "@opentelemetry/api";
+import {NextPage, NextPageContext} from "next";
+import {AuthenticatedPageProps} from "../types/page/PageProps";
 
-export default function Home() {
+const Home: NextPage<AuthenticatedPageProps> = ({user}) => {
   return (
-    <Page title="Home">
+    <Page title="Home" user={user}>
       <h1>hello world</h1>
     </Page>
   );
 }
 
-Home.getInitialProps = async (ctx) => {
+Home.getInitialProps = async (ctx: NextPageContext) => {
   const user = await authenticate(ctx);
   return { user };
 };
 
-const MainContainer = styled.div``;
+export default Home;

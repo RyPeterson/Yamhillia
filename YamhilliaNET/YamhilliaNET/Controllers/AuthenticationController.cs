@@ -38,7 +38,6 @@ namespace YamhilliaNET.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AuthenticateUser authenticateUser)
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             var claim = await _authenticationService.GenerateClaim(authenticateUser.Username, authenticateUser.Password);
             await HttpContext.SignInAsync(claim, new AuthenticationProperties()
