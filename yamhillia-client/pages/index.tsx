@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Page from "../components/Page";
 import authenticate from "../authenticate/authenticate";
 import {NextPage, NextPageContext} from "next";

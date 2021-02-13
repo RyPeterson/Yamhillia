@@ -1,7 +1,8 @@
 import api from "../api";
 import User from "../../types/user/User";
+import { ParamlessEndpoint } from "../../types/api/Endpoint";
 
-export default async function getUser(axios = api): Promise<User | null> {
+const getUser: ParamlessEndpoint<User | null > = async (axios = api) => {
   try {
     const response = await axios.get(`/auth/user`);
     return response.data.user;
@@ -14,3 +15,5 @@ export default async function getUser(axios = api): Promise<User | null> {
     throw e;
   }
 }
+
+export default getUser;

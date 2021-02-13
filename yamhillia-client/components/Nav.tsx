@@ -20,7 +20,6 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ user, navigationItems = [], ...rest }) => {
-    console.log(user);
   return (
     <Root {...rest}>
       <NavItems>

@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useState} from "react";
+import React, { FC, useCallback, useState } from "react";
 import styled from "styled-components";
 import UnauthenticatedPage from "../components/UnauthenticatedPage";
 import PageProps from "../types/page/PageProps";
@@ -7,8 +7,8 @@ import useLoginForm from "../hooks/pages/login/useLoginForm";
 import LoginForm, { formErrors } from "../components/LoginForm";
 import login from "../api/user/login";
 import FormError from "../types/components/FormError";
-import {useRouter} from "next/router";
-import {home} from "../constants/routes/shared";
+import { useRouter } from "next/router";
+import { home } from "../constants/routes/shared";
 
 const Login: FC<PageProps> = () => {
   const [errors, setErrors] = useState<FormError[]>([]);
@@ -33,7 +33,7 @@ const Login: FC<PageProps> = () => {
     }
 
     try {
-      await login(email, password);
+      await login({ username: email, password });
       await router.replace(home);
     } catch (e) {
       setErrors([
